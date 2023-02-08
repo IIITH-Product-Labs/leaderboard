@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{url_for('static',filename='submitlogin.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container1">
+            <img class="back-image" src="{{url_for('static',filename='image.png')}}" />           
+            <form  action="/submitlogin" method="POST" enctype="multipart/form-data">
+                <p class="text">To submit results please login by adding the credentials</p>
+                <fieldset class="c-1">
+                    <legend class="border-text"><img class="iiiticon" src="{{url_for('static',filename='iiit-new1 1.png')}}"/></legend>
+                    <div class="sub1">
+                        <div class="image1"><img class="usericon" src="{{url_for('static',filename='Vector1.png')}}" /></div>
+                        <div class="input1"><input class="i1" type="text" name="username" placeholder="Username"></input></div> 
+                    </div>
+                    <div class="sub2">
+                        <div class="image2"><img class="passwordicon" src="{{url_for('static',filename='Vector2.png')}}" /></div>
+                        <div class="input2"><input  class="i2" type="text" name="password" placeholder="Password"></input></div>
+                    </div>
+                    <div class="sub3">
+                        <button class="signinbutton" type="submit" value="Submit">Log In</button>
+                    </div>
+                    <div class="row">
+                        <div class="check"><input type="checkbox" class="checkbox" name="checkboxes" value=""></div>
+                        <div class="t1" >Remember me</div>
+                        <div class="content"><a href="" ><span>Forget  Password?</span></a></div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </body>
+</html>

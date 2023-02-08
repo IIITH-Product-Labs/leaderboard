@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{url_for('static',filename='adminstyle.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="overlap1-l">
+            <img class="iiit-new1-1-l" src="{{url_for('static',filename='iiit-new1 1.png')}}" />
+            <div class="m1">
+                <img class="logouticon" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+                <div class="m2" id="imagecontent">
+                    <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
+                    <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="scrollmenu-l">
+            
+            <a href="{{ url_for('adminabout') }}" class="nav-content">Home</a>
+            <a href="{{ url_for('adminobjective') }}" class="nav-content">Objectives</a>
+            <a href="{{ url_for('adminconsortium') }}" class="nav-content">Consortium Members</a>
+            <a href="{{ url_for('admindocuments') }}" class="nav-content">Documents</a>
+            <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="nav-content">Applications</a>
+            <div class="menu">
+                <button class="dropdown-btn1" id="dropdownButton">Leader Board</button>
+                <div class="menu-c" id="dropdownMenu">
+                    <a href="{{ url_for('download') }}" class="dropdown-content"><span>Download test set</span></a>
+                    <a href="{{ url_for('submit') }}" class="dropdown-content"><span>Submit result</span></a>
+                    <a href="{{ url_for('register') }}" class="dropdown-content"><span>User registration</span></a>
+                </div>
+            </div>
+            <div class="menu">
+                <button class="dropdown-btn2" id="dropdownButton1">For admin</button>
+                <div class="menu-c" id="dropdownMenu1">
+                    <a href="{{ url_for('approval') }}" class="dropdown-content"><span>Approval</span></a>
+                    <a href="{{ url_for('upload') }}" class="dropdown-content"><span>Upload test set</span></a>
+                    <a href="{{ url_for('edit') }}" class="dropdown-content"><span>Edit Leader board</span></a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="g73 "><img src="{{url_for('static',filename='ls1.png')}}" width="55px" height="160px"></div>
+        <div class="grp1 "><img src="{{url_for('static',filename='lpc1.png')}}" width="80px" height="100px" ></div>
+        <div class="container ">
+            <div class="dropdown-box">
+                <fieldset class="fieldset">
+                    <legend class="border-text">Select-Task-Type</legend>
+                        <div class="dropdown">
+                            <select class="select-element" onchange="getSelectedOption()">
+                                <option value="Translation" selected>Translation</option>  
+                            </select>
+                        </div>
+                </fieldset>
+            </div>
+            <div id="table-container">
+                <table id="table" style="width: 91%; margin-left: -9.3%;margin-top: 5.5%;position:absolute">
+                    <tr style="height:45px">
+                        <th style="width:3%" class="table-heading"></th>
+                        <th  style="width:15%" class="table-heading ">Organization</th>
+                        <th style="width:20%" class="table-heading ">Language</th>
+                        <th style="width:15%" class="table-heading ">Model Name</th>
+                        <th style="width:14%" class="table-heading ">Version</th>
+                        <th  style="text-align: center" colspan="3"  class="table-heading ">Metrics&Score</th>
+                    </tr>
+                    <tr style=" height:30px;background: #ECECEC; border: 1px solid #ADADAD; line-height: 10px; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: center;width:10.7%" class="table-data">bleu</td>
+                        <td style="text-align: center;width:10.5%" class="table-data">chrf</td>
+                        <td style="text-align: center" class="table-data">ter</td>
+                    </tr>
+                    
+                    {% for i in items %}
+                    
+                        <tr class="border-bottom">
+                            <td ><div class="circle"></div></td>
+                            <td class="tabledata1" >{{i['organisation']}}</td>
+                            <td class="tabledata1" >{{i['language']}}</td>
+                            <td class="tabledata1">{{i['module']}}</td>
+                            <td class="tabledata1" >{{i['version']}}</td>
+                            <td style="text-align: center" class="tabledata2" >{{i['bleu']}}</td>
+                            <td style="text-align: center" class="tabledata3" >{{i['chrf']}}</td>
+                            <td style="text-align: center" class="tabledata2" >{{i['ter']}}</td>
+                        </tr>
+                        
+                    {% endfor %}   
+                </table>
+             </div>
+        </div>
+        <script>
+            var imagebutton = document.getElementById('imagebutton');
+            var imagecontent = document.getElementById('imagecontent');
+            imagebutton.addEventListener('click', function() {
+                imagebutton.classList.toggle('open');
+            });
+    
+            
+            var dropdownButton = document.getElementById('dropdownButton');
+            var dropdownMenu = document.getElementById('dropdownMenu');
+
+            dropdownButton.addEventListener('click', function() {
+                dropdownButton.classList.toggle('open');
+            });
+
+            var dropdownButton1 = document.getElementById('dropdownButton1');
+            var dropdownMenu1 = document.getElementById('dropdownMenu1');
+
+            dropdownButton1.addEventListener('click', function() {
+                dropdownButton1.classList.toggle('open');
+            });
+            
+    
+            function getSelectedOption() {
+                var selectedOption = document.querySelector('select').value;
+                console.log(selectedOption)
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/route/to/flask/endpoint", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({ option: selectedOption }));
+                console.log("send");
+                xhr.addEventListener('load', function() {
+                    const response = JSON.parse(xhr.response);
+                    console.log(response)
+                    for(var i=0;i<response.length;i++){
+                    var newRow = table.insertRow();
+                    newRow.classList.add("border-bottom");
+                    var newCell1 = newRow.insertCell();
+                    newCell1.innerHTML = response[i][0]
+                    newCell1.classList.add("circle");
+                        for(var j=1;j<(response[i].length-3);j++){
+                            var newCell2=newRow.insertCell();
+                            newCell2.innerHTML = response[i][j];
+                            newCell2.classList.add("table-data1");
+                        }
+                        var newCell6 = newRow.insertCell();
+                        var newCell7 = newRow.insertCell();
+                        var newCell8 = newRow.insertCell();
+                        newCell6.innerHTML = response[i][5];
+                        newCell7.innerHTML = response[i][6];
+                        newCell8.innerHTML = response[i][7];
+                        newCell6.classList.add("table-data2");
+                        newCell7.classList.add("table-data3");
+                        newCell8.classList.add("table-data2");
+                    }
+                });
+            }
+        </script>
+
+
+    </body>
+</html>
