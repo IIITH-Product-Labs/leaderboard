@@ -21,17 +21,8 @@
     .m1 {
         display:flex;
         width:100%;
-        
+
       }
-      .logouticon{
-        width:2.7%;
-        height:2.7%;
-        float: right;
-        align-items: right;
-        justify-content: right;
-        margin-left:99%;
-        margin-bottom: 1.5%;
-    }
       .m2{
         
         display: none;
@@ -2295,34 +2286,32 @@ bottom: 0% ;
 /*iiith icon----------------------------------------------------------*/
 .overlap1-c {
     align-items: flex-end;
-    margin-top: 0.8%;
     display: flex; 
+    justify-content: space-between;
     width: 100%;
-    height: 50%; 
     padding: 10px 70px;
     background-image:url('Vector.png');
     background-size: cover;
     background-repeat: no-repeat;
-    position: relative;
 }
 
 .iiit-new1-1-c {
     height: 13%; 
     object-fit: cover;
     width: 9%; 
-
 }
 /*------------------------------------------------------------------*/
 
 /*Menu Bar----------------------------------------------------------*/
 .scrollmenu-c{
     background-color: #0F2749;
-    overflow: auto;
-    white-space: nowrap;
     width: 100%;
+    display: flex;
 }
 .scrollmenu-c a{
-	display: inline-block;
+    color: white;
+
+	/* display: inline-block;
 	color: white;
 	margin: 5px -65px; 
 	font-family: 'Montserrat';
@@ -2330,8 +2319,7 @@ bottom: 0% ;
     font-weight: 550;
     font-size: 16px;
     padding: 7px;
-    text-decoration: none;
-    margin-left: 10.3%;
+    text-decoration: none; */
 }
 .scrollmenu-c a:link{
 	text-decoration: none;
@@ -2955,9 +2943,6 @@ margin-top: 1vh;
 font-size: 12px;
 line-height: 24px;
 letter-spacing: -0.02em;
-}
-.overlap1-c {
-padding: 10px 25px;
 }
 .iiit-new1-1-c {
 height: 55.9%; 
