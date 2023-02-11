@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div class="max-w-7xl container w-full sm:mx-auto font-sans font-family-Montserrat "> 
+    <div class="max-w-7xl container w-full sm:mx-auto font-sans  "> 
       <div class="flex justify-between bg-gradient-to-t from-blue-100 w-full rounded-xl">
         <div class="">
           <img class="opacity-100 px-6 py-2 h-20" src="{{url_for('static',filename='iiit-new1 1.png')}}"  /> </div>
@@ -27,7 +27,7 @@
       </div>
       <!-- navbar  -->
       <div class="bg-indigo-900 text-white justify-between flex h-12  rounded-xl">
-        <a  href="{{ url_for('about') }}" class="mx-2 my-auto">Home</a>
+        <a  href="{{ url_for('about') }}" class="mx-2 my-auto hover:border-b-2">Home</a>
         <a href="{{ url_for('objective') }}" class="mx-2 my-auto">Objectives</a>
         <a href="{{ url_for('consortium') }}" class="mx-2 my-auto">Consortium Members</a>
         <a href="{{ url_for('documents') }}"class="mx-2 my-auto">Documents</a>
@@ -42,7 +42,7 @@
         <div class=" bg-sky-100  rounded-t-2xl  ">
 
           <div class=" w-full text-center pt-8"> 
-            <text class="  px-16  text-bold font-bold text-white text-2xl sm:text-5xl bg-indigo-900 tracking-wide	 rounded-tr-xl rounded-bl-xl">HIMANGY</text>
+            <text class="  px-16  text-bold font-bold text-white text-3xl sm:text-5xl bg-indigo-900 tracking-wide	 rounded-tr-xl rounded-bl-xl">HIMANGY</text>
           </div>
           
           <div class=" w-full text-center pt-2  "> 
@@ -71,7 +71,7 @@
         </div>
             <div class="">
               <div class="bg-white w- py-2">
-                <div class="text-3xl ml-16 text-orange-500 font font-semibold w-96 border-orange-500 border-b-2 border-opacity-25" >Try our MT Systems 
+                <div class="text-3xl ml-16 text-orange-500 font font-semibold sm:w-96   w-auto  border-orange-500 border-b-2 border-opacity-25" >Try our MT Systems 
                 </div>
               </div>
             </div>
@@ -79,17 +79,17 @@
             <a href="https://bhashini.gov.in/en/">
               <img class="pl-10 " src="{{url_for('static',filename='u_i_1.png')}}"/>
             </a>
-            <a href="https://ssmt.iiit.ac.in/translate">
-              <img class="pl-10 " src="{{url_for('static',filename='u_i_2.png')}}"/>
-              <div class=" invisible hover:visible">
-                <text class=" ">On going research work</text>
-              </div>
+            <a  class=" " href="https://ssmt.iiit.ac.in/translate">
+              <img class=" pl-10 group/item  " src="{{url_for('static',filename='u_i_2.png')}}"/>
+              
             </a>
+            <div class="opacity-0 group-hover/item:opacity-100 ">
+              On going research work            </div>
           </div>
-        
+       
       </div> 
         
-        <div class="footer text-white bg-indigo-900 pt-4">
+      <div class="footer text-white bg-blue-900 pt-4">
         <div class="flex   justify-between">
           <div class="  justify-self-bottom"><img class=" b-0" src="{{url_for('static',filename='Rectangle 2.png')}}"/> </div>
 
@@ -106,13 +106,12 @@
         </div>
         <div class="flex-none text-center "> 2022 © Copyright ltrc. All Rights Reserved</div>
       </div>
+      
     </div>
+   
+    
     <script>
-      
-
-            
-      
-       var imagebutton = document.getElementById('imagebutton');
+      var imagebutton = document.getElementById('imagebutton');
             var imagecontent = document.getElementById('imagecontent');
             imagebutton.addEventListener('click', function() {
                 imagebutton.classList.toggle('open');

@@ -7,21 +7,33 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static',filename='objective.css')}}">
+    <!-- <link rel="stylesheet" href="{{url_for('static',filename='objective.css')}}"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-        <div class="overlap1">
-            <img class="iiit-new1-1" src="{{url_for('static',filename='iiit-new1 1.png')}}"  />
-            <div class="m1">
-                <img class="logouticon" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
-                <div class="m2" id="imagecontent">
+    <div class="max-w-7xl container w-full sm:mx-auto font-sans ">
+            <div class="flex justify-between bg-gradient-to-t from-blue-100 w-full rounded-xl">
+                <div class="">
+                  <img class="opacity-100 px-6 py-2 h-20" src="{{url_for('static',filename='iiit-new1 1.png')}}"  /> </div>
+                <div class="flex">
+                  <img class="object-contain h-12 my-auto px-6" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+                  <div class="" id="imagecontent">
                     <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
                     <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
+                  </div>
                 </div>
             </div>
-        </div>
+        <div class="bg-indigo-900 text-white justify-between flex h-12  rounded-xl">
+          <a  href="{{ url_for('about') }}" class="mx-2 my-auto  hover:border-b-2">Home</a>
+          <a href="{{ url_for('objective') }}" class="mx-2 my-auto">Objectives</a>
+          <a href="{{ url_for('consortium') }}" class="mx-2 my-auto">Consortium Members</a>
+          <a href="{{ url_for('documents') }}"class="mx-2 my-auto">Documents</a>
+          <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="mx-2 my-auto">Applications</a>
+          <a href="{{ url_for('userleaderboard') }}" class="mx-2 my-auto"> Leader Board</a>
+        </div> 
         <div class="scrollmenu">
             <a href="{{ url_for('about') }}" >Home</a>
             <a href="{{ url_for('objective') }}" class="active" >Objectives</a>
@@ -30,14 +42,14 @@
             <a target="_self" href="https://himgangycanvas.iiithcanvas.com/">Applications</a>
             <a href="{{ url_for('userleaderboard') }}">Leader Board</a>
         </div>
-        <div class="row">
-            <img class="group_images" id="img1" src="{{url_for('static',filename='objective1.png')}}"/>
-            <img class="group_images" id="img2" src="{{url_for('static',filename='objective2.png')}}"/>
-            <img class="group_images" id="img3" src="{{url_for('static',filename='objective3.png')}}"/>
-            <img class="group_images" id="img4" src="{{url_for('static',filename='objective4.png')}}"/>
-            <img class="group_images" id="img5" src="{{url_for('static',filename='objective5.png')}}"/>
+        <div class=" flex  justify-between content-center  ">
+            <div class=" hover:border-2 hover:border-indigo-500"> <img class="h-40 p-2 " id="img1" src="{{url_for('static',filename='objective1.png')}}"/> </div>
+            <div class=" hover:border-2 hover:border-indigo-500"> <img class="h-40 p-2 " id="img2" src="{{url_for('static',filename='objective2.png')}}"/> </div>
+            <div class=" hover:border-2 hover:border-indigo-500"> <img class="h-40 p-2 " id="img3" src="{{url_for('static',filename='objective3.png')}}"/> </div>
+            <div class=" hover:border-2 hover:border-indigo-500"> <img class="h-40 p-2 " id="img4" src="{{url_for('static',filename='objective4.png')}}"/> </div>
+            <div class=" hover:border-2 hover:border-indigo-500"> <img class="h-40 p-2 " id="img5" src="{{url_for('static',filename='objective5.png')}}"/> </div>
             
-            <img class="arrow_images" src="{{url_for('static',filename='objective arrow.png')}}"/>
+            <img class="h-12 my-auto " src="{{url_for('static',filename='objective arrow.png')}}"/>
         </div>
           
           <div class="selected-image"></div>
@@ -104,6 +116,8 @@
                 <img class="yellow-rectangle" src="{{url_for('static',filename='Rectangle 2.png')}}"/>
                 <img class="orange-rectangle" src="{{url_for('static',filename='Rectangle 1780.png')}}"/>
               </div>
+  
+        </div>
         <script>
             $(document).ready(function(){
                 // Show the content of the first image by default
