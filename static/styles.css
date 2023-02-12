@@ -24,17 +24,15 @@
 
       }
       .m2{
-        
         display: none;
         position: absolute;
-        margin-top: 2.8%;
         width: 165px; 
         height: auto;  
         background: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 0px 4px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
-        z-index: 2;
-        margin-left: 73.0%;
+        z-index: 12;
+        /* margin-left: 73.0%; */
       }
     
       
@@ -77,6 +75,13 @@
         display: none;
     }
       
+          #hamburg:hover + #mobilecontent {
+        display: block;
+    }
+    
+    #hamburg.open + #mobilecontent {
+        display: block;
+    }
       
     .scrollmenu-l{
         background-color: #0F2749;
@@ -2289,7 +2294,7 @@ bottom: 0% ;
     display: flex; 
     justify-content: space-between;
     width: 100%;
-    padding: 10px 70px;
+    padding: 10px 10px;
     background-image:url('Vector.png');
     background-size: cover;
     background-repeat: no-repeat;
