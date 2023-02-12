@@ -8,6 +8,25 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily:{
+            body: ['"Montserrat"']
+          },
+          extend: {
+          backgroundImage:{
+           navPattern: "url('/images/Vector1_.png')"
+          },
+            colors: {
+              DarkBlue: '#0F2749',
+              Orange: "#F37E27", 
+            }
+          }
+        }
+      }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
     <!-- <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,16 +42,16 @@
           <div class="" id="imagecontent">
             <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
             <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
-          </div>
         </div>
       </div>
+    </div>
         <!-- navbar  -->
-    <div class="bg-indigo-900 text-white justify-between flex h-12 w-full mx-0 rounded-xl">
+    <div class="bg-DarkBlue text-white justify-between flex h-12 w-full mx-0 rounded-xl overflow-x-auto ">
       <a  href="{{ url_for('about') }}"     class="mx-2 my-auto  active :border-b-2 border-orange-500">Home</a>
       <a href="{{ url_for('objective') }}"  class="mx-2 my-auto">Objectives</a>
       <a href="{{ url_for('consortium') }}" class="mx-2 my-auto">Consortium Members</a>
       <a href="{{ url_for('documents') }}"  class="mx-2 my-auto">Documents</a>
-      <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="mx-2 my-auto">Applications</a>
+      <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="mx-2 my-auto" >Applications</a>
       <a href="{{ url_for('userleaderboard') }}" class="mx-2 my-auto"> Leader Board</a>
     </div> 
 
@@ -47,20 +66,20 @@
         <img class=" mx-auto mt-4 md:h-auto  h-24 " src="{{url_for('static',filename='Group 600.png')}}" >
         </div>
       </div>
-      <div class="flex:none  "> 
-        <img class="w-40 opacity-50" src="{{url_for('static',filename='grp1.png')}}">
+      <div class="flex:none align-top    "> 
+        <img class="w-40 opacity-50 mt-0" src="{{url_for('static',filename='grp1.png')}}">
       </div>
     </div>
    
-    <div class="bg-blue-900 md:w-3/5 w-3/4 pr-3 text-right rounded-r-full text-white md:text-3xl text-l ">
-      <p class=" md:p-2 p-1 font-semibold">Other Investigators</p>  
+    <div class="bg-DarkBlue md:w-3/5 w-3/4 pr-3 text-right rounded-r-full text-white md:text-3xl text-l ">
+      <p class=" md:p-2 p-1 my-4 font-semibold">Other Investigators</p>  
     </div>
 
     <div class=" grid  lg:grid-cols-3  md:grid-cols-2 sm:grid-col  mt-6 gap-8"  >
         
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
-                <p class="text-semibold text-2xl ">English</p>
+            <div class=" flex-col items-center text-left   mx-10  " >
+              <div class=" p-2 bg-Orange  text-center rounded-xl ">
+                <p class="text-semibold text-2xl  ">English</p>
               </div>
                 <p class="text-l font-light text-center">IIIT Hyderabad</p>
               <div class=" flex item-center  ">  
@@ -72,7 +91,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left  " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Hindi</p>
               </div>
                 <p class="text-l font-light text-center">IIIT Hyderabad</p>
@@ -86,7 +105,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Punjabi</p>
               </div>
                 <p class="text-l font-light text-center">CDAC Noida</p>
@@ -101,7 +120,7 @@
             </div>
 
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">urdu</p>
               </div>
                 <p class="text-l font-light text-center">IIIT Hyderabad, Punjabi University</p>
@@ -115,7 +134,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Telugu</p>
               </div>
                 <p class="text-l font-light text-center">IIIT Hyderabad, University of Hyderabad</p>
@@ -129,7 +148,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Kannada</p>
               </div>
                 <p class="text-l font-light text-center">Manipal Institute of Techonology, CDAC Bangalore</p>
@@ -144,7 +163,7 @@
             </div>
 
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Sindhi</p>
               </div>
                 <p class="text-l font-light text-center">Punjabi University</p>
@@ -158,7 +177,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Odia</p>
               </div>
                 <p class="text-l font-light text-center">IIIT Bhubaneswar, CDAC Noida</p>
@@ -172,7 +191,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Dogri</p>
               </div>
                 <p class="text-l font-light text-center">CDAC Noida, Govt. College for Women, Jammu</p>
@@ -186,7 +205,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Kashmiri</p>
               </div>
                 <p class="text-l font-light text-center">University of Kashmir</p>
@@ -200,7 +219,7 @@
               </div>
             </div>
             <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-orange-300  text-center rounded-xl mx-10">
+              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
                 <p class="text-semibold text-2xl ">Gujarati</p>
               </div>
                 <p class="text-l font-light text-center">IDAIICT, IIT Patna</p>
@@ -215,7 +234,7 @@
             </div>
           </div>      
     </div>
-    <div class="footer text-white bg-blue-900 pt-4">
+    <div class="footer text-white bg-DarkBlue pt-4">
       <div class="flex   justify-between">
         <div class="  justify-self-bottom"><img class=" b-0" src="{{url_for('static',filename='Rectangle 2.png')}}"/> </div>
 
