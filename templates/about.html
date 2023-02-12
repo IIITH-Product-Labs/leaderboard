@@ -11,52 +11,110 @@
     <script>
       tailwind.config = {
         theme: {
-          fontFamily:{
-            body: ['"Montserrat"']
+          fontFamily: {
+            body: ['"Montserrat"'],
           },
           extend: {
-          backgroundImage:{
-           navPattern: "url('/images/Vector1_.png')"
-          },
+            backgroundImage: {
+              navPattern: "url('/images/Vector1_.png')",
+            },
             colors: {
-              DarkBlue: '#0F2749',
-              
-            }
-          }
-        }
-      }
+              DarkBlue: "#0F2749",
+              DarkOrgane: "#F37E27",
+              Yellow: "#FCC02D66",
+            },
+          },
+        },
+      };
     </script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}"> -->
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div class="container w-full  font-Montserrat   "> 
-      <div class="flex justify-between bg-gradient-to-t from-blue-100 w-full rounded-xl">
+    <div class="  font-Montserrat   "> 
+      <div class="overlap1-c">
+        <img
+          class="w-24 h-auto"
+          src="{{url_for('static',filename='Icon.png')}}"
+        />
+        <div class="flex gap-4">
         <div class="">
-          <img class="opacity-100 px-6 py-2 h-20" src="{{url_for('static',filename='iiit-new1 1.png')}}"  /> </div>
-        <div class="flex">
-          <img class="object-contain h-12 my-auto px-6" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
-          <div class="" id="imagecontent">
+          <img class="h-10 md:mr-5 mr-0" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+          <div class="m2" id="imagecontent">
             <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
             <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
           </div>
         </div>
+        <div class="w-10 md:w-0">
+          <img class="h-10" id="hamburg" src="{{url_for('static',filename='menu-04.png')}}" />
+        </div>
+        </div>
       </div>
       <!-- navbar  -->
-      <div class="bg-indigo-900 text-white justify-between flex h-12  rounded-xl">
-        <a  href="{{ url_for('about') }}" class="mx-2 my-auto hover:border-b-2">Home</a>
-        <a href="{{ url_for('objective') }}" class="mx-2 my-auto">Objectives</a>
-        <a href="{{ url_for('consortium') }}" class="mx-2 my-auto">Consortium Members</a>
-        <a href="{{ url_for('documents') }}"class="mx-2 my-auto">Documents</a>
-        <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="mx-2 my-auto">Applications</a>
-        <a href="{{ url_for('userleaderboard') }}" class="mx-2 my-auto"> Leader Board</a>
-      </div>                 
+      <div id="mobilecontent" class="w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-200 overflow-x-auto">
+        <div class="m-auto">
+          <div class="flex flex-column text-center font-bold text-2xl gap-10 pt-10">
+            <a href="{{ url_for('about') }}"
+              class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
+            <a href="{{ url_for('objective') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+            <a href="{{ url_for('consortium') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
+              Members</a>
+            <a href="{{ url_for('documents') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
+            <a target="_self" href="https://himgangycanvas.iiithcanvas.com/"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
+            <a href="{{ url_for('userleaderboard') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader
+              Board</a>
+          </div>
+        </div>
+        </div>
+    
+        <div
+          class="  md:h-auto md:w-full flex gap-3 bg-DarkBlue font-semibold font-body py-2 overflow-x-auto h-0 w-0"
+        >
+          <div class="mx-auto gap-5 md:gap-16 lg:gap-30 flex flex-row my-1">
+            <a
+              href="{{ url_for('about') }}"
+              class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+              >Home</a
+            >
+            <a
+              href="{{ url_for('objective') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+              >Objectives</a
+            >
+            <a
+              href="{{ url_for('consortium') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+              >Consortium Members</a
+            >
+            <a
+              href="{{ url_for('documents') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+              >Documents</a
+            >
+            <a
+              target="_self"
+              href="https://himgangycanvas.iiithcanvas.com/"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+              >Applications</a
+            >
+            <a
+              href="{{ url_for('userleaderboard') }}"
+              class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+              >Leader Board</a
+            >
+          </div>
+        </div>               
       <!-- Hero  -->
       
       
         <img class="bg-contain mx-auto  p-4 lg:p-10" src="{{url_for('static',filename='Cloud_new.png')}}" />
-      <div class="sm:mx-8 mx-0 my-10">
+      <div class=" max-w-7xl my-10   mx-auto ">
         <div class=" bg-sky-100  rounded-t-2xl  ">
 
           <div class=" w-full text-center pt-8"> 
@@ -78,18 +136,18 @@
           <div class=" ">
             <div class="">
               <div class="bg-white w-full  py-2">
-                <div class="text-3xl ml-16 text-orange-500 font font-semibold w-40 border-orange-500 border-b-2 border-opacity-25" >About           </div>
+                <div class="text-3xl lg:ml-16  ml-0  text-orange-500 font font-semibold w-40 border-orange-500 border-b-2 border-opacity-25" >About           </div>
               </div>
               
             </div>
           </div>
-          <div class="mx-20 text-xl font-normal   tracking-wider  py-2">
-            <text class="">HIMANGY (HIndustani Machini ANuvaad TechnoloGY) is an Indian Language to Indian Language Machine Translation project. It is a consortium based project under BHASHINI and is funded by Ministry of Electronics and Information Technology (Meity), Government of India. IIIT-Hyderabad is the lead institute of the project.</text>
+          <div class=" md:mx-24 mx-2  text-xl font-light tracking-wider  py-2">
+            <text class=" relative ">HIMANGY (HIndustani Machini ANuvaad TechnoloGY) is an Indian Language to Indian Language Machine Translation project. It is a consortium based project under BHASHINI and is funded by Ministry of Electronics and Information Technology (Meity), Government of India. IIIT-Hyderabad is the lead institute of the project.</text>
           </div>
         </div>
             <div class="">
-              <div class="bg-white w- py-2">
-                <div class="text-3xl ml-16 text-orange-500 font font-semibold sm:w-96   w-auto  border-orange-500 border-b-2 border-opacity-25" >Try our MT Systems 
+              <div class="bg-white w-full py-2">
+                <div class="text-3xl  lg:ml-16  ml-0  text-orange-500 font font-semibold sm:w-96    border-orange-500 border-b-2 border-opacity-25" >Try our MT Systems 
                 </div>
               </div>
             </div>
@@ -107,23 +165,22 @@
        
       </div> 
         
-      <div class="footer text-white bg-blue-900 pt-4">
-        <div class="flex   justify-between">
-          <div class="  justify-self-bottom"><img class=" b-0" src="{{url_for('static',filename='Rectangle 2.png')}}"/> </div>
-
-          
-            <div class="flex justify-between "> 
-              <div class="">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India</div>
-              <div class="">trc.office1@iiit.ac.in <br>+9140-6653 1581<br> +9140-6653 1413</div>
-            </div>  
-            <div class=" justify-self-bottom"><img class="" src="{{url_for('static',filename='Rectangle 1780.png')}}"/> </div>
-          
-        
-        
-        
+      <div class="footer text-white bg-DarkBlue  flex   justify-between  pt-2 sm:pt-4">
+      
+        <img class="flex-none lg:w-40 md:w-24  w-12 h-auto mt-auto  " src="{{url_for('static',filename='Rectangle 2.png')}}"/> 
+       
+        <div class="flex flex-grow justify-between fontFamily-Montserrat  content-left   lg:text-xl md:text-s text-xs ">
+            <text class=" lg:mx-12">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
+            </text>
+            <text class=" lg:mx-12 text-xs lg:text-xl md:text-s  ">trc.office1@iiit.ac.in <br>+9140-6653 1581<br> +9140-6653 1413</text>
         </div>
-        <div class="flex-none text-center "> 2022 © Copyright ltrc. All Rights Reserved</div>
+          
+        
+        <img class="flex-none   my-auto  lg:h-40 md:h-24  h-12 " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
+  
+          
       </div>
+      <div class="flex-none text-center text-gray-400 text-xs"> 2022 © Copyright ltrc. All Rights Reserved</div>
       
     </div>
    
@@ -134,7 +191,22 @@
             imagebutton.addEventListener('click', function() {
                 imagebutton.classList.toggle('open');
             });
-    
+
+            var mobilemenu = false
+
+      var hambutton = document.getElementById('hamburg');
+        var hamcontent = document.getElementById('mobilecontent');
+        hambutton.addEventListener('click', function () {
+          // hambutton.classList.toggle('open');
+          mobilemenu = !mobilemenu
+          if (mobilemenu) {
+            hamcontent.className="w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+          }
+          else {
+            hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+          }
+        });
+
     </script>
   </body>
 </html>

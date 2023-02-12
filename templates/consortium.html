@@ -1,61 +1,148 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
-          fontFamily:{
-            body: ['"Montserrat"']
+          fontFamily: {
+            body: ['"Montserrat"'],
           },
+          // fontSize: {
+          //   xxs:"8px",
+            
+          // },
           extend: {
-          backgroundImage:{
-           navPattern: "url('/images/Vector1_.png')"
-          },
+            backgroundImage: {
+              navPattern: "url('/images/Vector1_.png')",
+            },
             colors: {
-              DarkBlue: '#0F2749',
-              Orange: "#F37E27", 
-            }
-          }
-        }
-      }
+              DarkBlue: "#0F2749",
+              DarkOrgane: "#F37E27",
+              Yellow: "#FCC02D66",
+            },
+          },
+        },
+      };
     </script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}" />
     
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class="   w-screen  font-sans " >
-      <div class="flex justify-between bg-gradient-to-t from-blue-100 w-full rounded-xl">
-        <div class="">
-          <img class="opacity-100 px-6 py-2 h-20" src="{{url_for('static',filename='iiit-new1 1.png')}}"  /> 
-        </div>
-        <div class="flex">
-          <img class="object-contain h-12 my-auto px-6" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
-          <div class="" id="imagecontent">
-            <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
-            <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
+    <div class="overlap1-c">
+      <img
+        class="w-24 h-auto"
+        src="{{url_for('static',filename='Icon.png')}}"
+      />
+      <div class="flex gap-4">
+      <div class="">
+        <img class="h-10 md:mr-5 mr-0" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+        <div class="m2" id="imagecontent">
+          <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
+          <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
         </div>
       </div>
+      <div class="w-10 md:w-0">
+        <img class="h-10" id="hamburg" src="{{url_for('static',filename='menu-04.png')}}" />
+      </div>
+      </div>
     </div>
-        <!-- navbar  -->
-    <div class="bg-DarkBlue text-white justify-between flex h-12 w-full mx-0 rounded-xl overflow-x-auto ">
-      <a  href="{{ url_for('about') }}"     class="mx-2 my-auto  active :border-b-2 border-orange-500">Home</a>
-      <a href="{{ url_for('objective') }}"  class="mx-2 my-auto">Objectives</a>
-      <a href="{{ url_for('consortium') }}" class="mx-2 my-auto">Consortium Members</a>
-      <a href="{{ url_for('documents') }}"  class="mx-2 my-auto">Documents</a>
-      <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="mx-2 my-auto" >Applications</a>
-      <a href="{{ url_for('userleaderboard') }}" class="mx-2 my-auto"> Leader Board</a>
-    </div> 
 
+    <!-- navbar start -->
+    <div id="mobilecontent" class="w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-200 overflow-x-auto">
+    <div class="m-auto">
+      <div class="flex flex-column text-center font-bold text-2xl gap-10 pt-10">
+        <a href="{{ url_for('about') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
+        <a href="{{ url_for('objective') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+        <a href="{{ url_for('consortium') }}"
+          class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
+          Members</a>
+        <a href="{{ url_for('documents') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
+        <a target="_self" href="https://himgangycanvas.iiithcanvas.com/"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
+        <a href="{{ url_for('userleaderboard') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader
+          Board</a>
+      </div>
+    </div>
+    </div>
 
+    <div
+      class="md:h-auto md:w-full flex gap-3 bg-DarkBlue font-semibold font-body py-2 overflow-x-auto h-0 w-0"
+    >
+      <div class="mx-auto gap-5 md:gap-16 lg:gap-30 flex flex-row my-1">
+        <a
+          href="{{ url_for('about') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+          >Home</a
+        >
+        <a
+          href="{{ url_for('objective') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+          >Objectives</a
+        >
+        <a
+          href="{{ url_for('consortium') }}"
+          class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+          >Consortium Members</a
+        >
+        <a
+          href="{{ url_for('documents') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+          >Documents</a
+        >
+        <a
+          target="_self"
+          href="https://himgangycanvas.iiithcanvas.com/"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+          >Applications</a
+        >
+        <a
+          href="{{ url_for('userleaderboard') }}"
+          class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
+          >Leader Board</a
+        >
+      </div>
+    </div>
+       <!-- navbarrr endd -->
+
+    <!-- <div class=" conatainer flex flex-column h-auto  "> 
+    <div class=" flex   flex-row " > 
+      <img class=" flex-none h-20 mt-80" src="{{url_for('static',filename='g72.png')}}" />
+      <div class=" flex-grow  flex-col "> 
+        <img class="mx-auto max-h-80 mt-2" src="{{url_for('static',filename='group.png')}}" />
+        <img class="mx-auto mt-10 sm:h-20" src="{{url_for('static',filename='Group 600.png')}}" />  
+      </div>
+      <img
+      class=" flex-none right-dots-grp sm:mt-20 mt-0  "
+      src="{{url_for('static',filename='grp1.png')}}"
+      />
+     
+    </div>
+    <div class=" pb-0" >
+      <div class="other-investigators">
+        <p class="text">Other Investigators</p>
+      </div>
+    </div>
+    
+  
+    
+    </div> -->
     <div class="flex items-end  md:mb-10 "> 
       <div class="flex:none"> 
         <img class="w-40 opacity-50" src="{{url_for('static',filename='g72.png')}}">
@@ -63,25 +150,24 @@
       <div class="flex-grow flex-col  mt-4 item-center "> 
         <div> 
           <img class="mx-auto " src="{{url_for('static',filename='group.png')}}" />
-        <img class=" mx-auto mt-4 md:h-auto  h-24 " src="{{url_for('static',filename='Group 600.png')}}" >
+        <img class=" mx-auto mt-4 md:h-auto  h-28 " src="{{url_for('static',filename='Group 600.png')}}" >
         </div>
       </div>
-      <div class="flex:none align-top    "> 
-        <img class="w-40 opacity-50 mt-0" src="{{url_for('static',filename='grp1.png')}}">
+      <div class="flex:none my-auto "> 
+        <img class="w-40 opacity-50" src="{{url_for('static',filename='grp1.png')}}">
       </div>
     </div>
-   
-    <div class="bg-DarkBlue md:w-3/5 w-3/4 pr-3 text-right rounded-r-full text-white md:text-3xl text-l ">
-      <p class=" md:p-2 p-1 my-4 font-semibold">Other Investigators</p>  
+    <div class="bg-DarkBlue text-Montserrat md:w-3/5 w-3/4 pr-6 p-2  mt-2 text-right rounded-r-full text-white md:text-2xl text-l  ">
+      <text class="  sm:p-4 font-semibold  ">Other Investigators</text>  
     </div>
 
-    <div class=" grid  lg:grid-cols-3  md:grid-cols-2 sm:grid-col  mt-6 gap-8"  >
+    <div class=" grid  lg:grid-cols-3 lg:mx-24  md:grid-cols-2 sm:grid-col  mt-6 mb-12 gap-12"  >
         
-            <div class=" flex-col items-center text-left   mx-10  " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl ">
-                <p class="text-semibold text-2xl  ">English</p>
+            <div class=" flex-col items-center text-left mx-10     " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
+                <p class="text-bold font-normal text-2xl ">English</p>
               </div>
-                <p class="text-l font-light text-center">IIIT Hyderabad</p>
+                <p class="text-l font-lighter text-center my-3">IIIT Hyderabad</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}"><p class="text-xl my-auto ">Prof Aditi Mukherjee <b>(PI)</b></p>
               </div>
@@ -90,142 +176,145 @@
                 <p class="text-xl my-auto ">Prof Dipti Misra Sharma <b>(Co-PI)</b></p>
               </div>
             </div>
-            <div class=" flex-col items-center text-left  " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+
+            
+
+            <div class=" flex-col items-center text-left mx-10  " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Hindi</p>
               </div>
-                <p class="text-l font-light text-center">IIIT Hyderabad</p>
+                <p class="text-l font-light text-center my-3">IIIT Hyderabad</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-xl my-auto ">Prof Dipti Misra Sharma<b>(PI)</b></p>
+                <p class="text-xl my-auto ">Prof Dipti Misra Sharma <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
                 <p class="text-xl my-auto ">Prof Radhika Mamidi <b>(Co-PI)</b></p>
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left mx-10   " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Punjabi</p>
               </div>
-                <p class="text-l font-light text-center">CDAC Noida</p>
+                <p class="text-l font-light text-center my-3">CDAC Noida</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-xl my-auto ">Prof Karunesh Arora<b>(PI)</b></p>
+                <p class="text-xl my-auto ">Prof Karunesh Arora <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-xl my-auto ">Prof Sunita Arora<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof Sunita Arora <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left mx-10  " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">urdu</p>
               </div>
-                <p class="text-l font-light text-center">IIIT Hyderabad, Punjabi University</p>
+                <p class="text-l font-light text-center my-3">IIIT Hyderabad, Punjabi University</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-xl my-auto ">Prof Dipti Misra Sharma<b>(PI)</b></p>
+                <p class="text-xl my-auto ">Prof Dipti Misra Sharma <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='punjabi_university.png')}}">
-                <p class="text-xl my-auto ">Prof G.S. Lehal<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof G.S. Lehal <b>(Co-PI)</b></p>                         
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left   mx-10 " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl">
                 <p class="text-semibold text-2xl ">Telugu</p>
               </div>
-                <p class="text-l font-light text-center">IIIT Hyderabad, University of Hyderabad</p>
+                <p class="text-l font-light text-center my-3">IIIT Hyderabad, University of Hyderabad</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
                 <p class="text-xl my-auto ">Prof Radhika Mamidi <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='uoh.png')}}">
-                <p class="text-xl my-auto ">Prof Rajya Rama<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof Rajya Rama <b>(Co-PI)</b></p>                         
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left mx-10  " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Kannada</p>
               </div>
-                <p class="text-l font-light text-center">Manipal Institute of Techonology, CDAC Bangalore</p>
+                <p class="text-l font-light text-center my-3">Manipal Institute of Techonology, CDAC Bangalore</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Manipal.png')}}">
                 <p class="text-xl my-auto ">Prof Narendra VG <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-xl my-auto ">Prof Annarao Kulkarni<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof Annarao Kulkarni <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left  mx-10 " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Sindhi</p>
               </div>
-                <p class="text-l font-light text-center">Punjabi University</p>
+                <p class="text-l font-light text-center my-3">Punjabi University</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='punjabi_university.png')}}">
-                <p class="text-xl my-auto ">Prof G.S. Lehal  <b>(PI)</b></p>
+                <p class="text-xl my-auto ">Prof G.S. Lehal <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='punjabi_university.png')}}">
-                <p class="text-xl my-auto ">Prof Tejinder Singh<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof Tejinder Singh <b>(Co-PI)</b></p>                         
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left mx-10  " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Odia</p>
               </div>
-                <p class="text-l font-light text-center">IIIT Bhubaneswar, CDAC Noida</p>
+                <p class="text-l font-light text-center my-3">IIIT Bhubaneswar, CDAC Noida</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='iiit b.png')}}">
                 <p class="text-xl my-auto ">Prof Rakesh Chandra Balbantaray <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-xl my-auto ">Prof Karunesh Arora<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof Karunesh Arora <b>(Co-PI)</b></p>                         
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left  mx-10 " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Dogri</p>
               </div>
-                <p class="text-l font-light text-center">CDAC Noida, Govt. College for Women, Jammu</p>
+                <p class="text-l font-light text-center my-3">CDAC Noida, Govt. College for Women, Jammu</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='GCW.png')}}">
                 <p class="text-xl my-auto ">Prof Karunesh Arora <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-xl my-auto ">Prof Preeti Dubey<b>(Co-PI)</b></p>                         
+                <p class="text-xl my-auto ">Prof Preeti Dubey <b>(Co-PI)</b></p>                         
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left  mx-10 " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Kashmiri</p>
               </div>
-                <p class="text-l font-light text-center">University of Kashmir</p>
+                <p class="text-l font-light text-center my-3">University of Kashmir</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='uok.png')}}">
-                <p class="text-xl my-auto ">Prof Adil Amin Kak<b>(PI)</b></p>
+                <p class="text-xl my-auto ">Prof Adil Amin Kak <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='uok.png')}}">
                 <p class="text-xl my-auto ">Prof Preeti Dubey <b>(Co-PI)</b></p>                         
               </div>
             </div>
-            <div class=" flex-col items-center text-left   " >
-              <div class=" p-2 bg-Orange  text-center rounded-xl mx-10">
+            <div class=" flex-col items-center text-left  mx-10 " >
+              <div class=" p-2 bg-Yellow  text-center rounded-xl ">
                 <p class="text-semibold text-2xl ">Gujarati</p>
               </div>
-                <p class="text-l font-light text-center">IDAIICT, IIT Patna</p>
+                <p class="text-l font-light text-center my-3">IDAIICT, IIT Patna</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='DAIICT.png')}}">
-                <p class="text-xl my-auto ">Prof Prasenjit Majumder<b>(PI)</b></p>
+                <p class="text-xl my-auto ">Prof Prasenjit Majumder <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='patna.png')}}">
@@ -234,27 +323,67 @@
             </div>
           </div>      
     </div>
-    <div class="footer text-white bg-DarkBlue pt-4">
-      <div class="flex   justify-between">
-        <div class="  justify-self-bottom"><img class=" b-0" src="{{url_for('static',filename='Rectangle 2.png')}}"/> </div>
+    <!-- <div class="overlap-footer-c">
+      <div class="lang">
+        Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India
+      </div>
+      <div class="contact">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img class="m w-4" src="{{url_for('static',filename='msg-icon.png')}}"><span> hello </span>
+        1trc.office1@iiit.ac.in 
+        <img class="m" src="{{url_for('static',filename='call-icon.png')}}">
+        &nbsp;&nbsp;&nbsp;&nbsp;+9140-6653 1581<br>
+        <img class="m" src="{{url_for('static',filename='tele-icon.png')}}">
+        &nbsp;&nbsp;&nbsp;&nbsp;+9140-6653 1413
+      </div>
+      <div class="copyright">2022 © Copyright ltrc. All Rights Reserved</div>
+      <img class="yellow-rectangle" src="{{url_for('static',filename='Rectangle 2.png')}}"/>
+      <img class="orange-rectangle" src="{{url_for('static',filename='Rectangle 1780.png')}}"/>
+    </div> -->
+
+
+
+
+
+    <div class="footer text-white bg-DarkBlue  flex   justify-between  pt-2 sm:pt-4">
+      
+      <img class="flex-none lg:w-40 md:w-24  w-12 h-auto mt-auto  " src="{{url_for('static',filename='Rectangle 2.png')}}"/> 
+     
+      <div class="flex flex-grow justify-between fontFamily-Montserrat  content-left   lg:text-xl md:text-s text-xs ">
+          <text class=" lg:mx-12">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
+          </text>
+          <text class=" lg:mx-12 text-xs lg:text-xl md:text-s  ">trc.office1@iiit.ac.in <br>+9140-6653 1581<br> +9140-6653 1413</text>
+      </div>
+        
+      
+      <img class="flex-none   my-auto  lg:h-40 md:h-24  h-12 " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
 
         
-          <div class="flex justify-between "> 
-            <div class="">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India</div>
-            <div class="">trc.office1@iiit.ac.in <br>+9140-6653 1581<br> +9140-6653 1413</div>
-          </div>  
-          <div class=" justify-self-bottom"><img class="" src="{{url_for('static',filename='Rectangle 1780.png')}}"/> </div>
-        </div>
-      <div class="flex-none text-center "> 2022 © Copyright ltrc. All Rights Reserved</div>
     </div>
+    <div class="flex-none text-center text-gray-400 text-xs"> 2022 © Copyright ltrc. All Rights Reserved</div>
   </div>
+  
     <script>
-      var imagebutton = document.getElementById('imagebutton');
-           var imagecontent = document.getElementById('imagecontent');
-           imagebutton.addEventListener('click', function() {
-               imagebutton.classList.toggle('open');
-           });
-   
-   </script>
+           var imagebutton = document.getElementById('imagebutton');
+            var imagecontent = document.getElementById('imagecontent');
+            imagebutton.addEventListener('click', function () {
+              imagebutton.classList.toggle('open');
+            });
+            
+              var mobilemenu = false
+
+            var hambutton = document.getElementById('hamburg');
+              var hamcontent = document.getElementById('mobilecontent');
+              hambutton.addEventListener('click', function () {
+                // hambutton.classList.toggle('open');
+                mobilemenu = !mobilemenu
+                if (mobilemenu) {
+                  hamcontent.className="w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+                }
+                else {
+                  hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+                }
+              });
+    </script>
   </body>
 </html>
