@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -20,6 +18,7 @@
           },
             colors: {
               DarkBlue: '#0F2749',
+              DarkOrgane: '#F37E27'
             }
           }
         }
@@ -31,9 +30,10 @@
   </head>
   <body>
     <div class="overlap1-c">
-      <img class="w-20 h-auto" src="{{url_for('static',filename='Icon.png')}}" />
+      <img class="w-24 h-auto" src="{{url_for('static',filename='Icon.png')}}" />
       <div class="h-10">
         <img class="w-10" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+        <!-- <div id="foo">hello world!</div> -->
         <div class="" id="imagecontent">
           <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
           <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
@@ -42,16 +42,15 @@
 
       
     </div>
-    <div class="flex gap-3 bg-DarkBlue font-semibold font-body py-2">
-      <div class="mx-auto gap-10 flex flex-row my-1">
-        <a href="{{ url_for('about') }}" class=" text-white">Home</a>
-        <a href="{{ url_for('objective') }}" class=" text-white">Objectives</a>
-        <a href="{{ url_for('consortium') }}"  class="text-white">Consortium Members</a>
-        <a href="{{ url_for('documents') }}" class="text-white">Documents</a>
-        <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="text-white">Applications</a>
-        <a href="{{ url_for('userleaderboard') }}" class="text-white">Leader Board</a>
+    <div class="md:h-auto md:w-full flex gap-3 bg-DarkBlue font-semibold font-body py-2 overflow-x-auto h-0 w-0">
+      <div class="mx-auto gap-5 md:gap-16 lg:gap-30 flex flex-row my-1 ">
+        <a href="{{ url_for('about') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2	hover:underline-offset-4">Home</a>
+        <a href="{{ url_for('objective') }}" class=" text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2	hover:underline-offset-4">Objectives</a>
+        <a href="{{ url_for('consortium') }}" class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2	hover:underline-offset-4">Consortium Members</a>
+        <a href="{{ url_for('documents') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2	hover:underline-offset-4">Documents</a>
+        <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2	hover:underline-offset-4">Applications</a>
+        <a href="{{ url_for('userleaderboard') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2	hover:underline-offset-4">Leader Board</a>
       </div>
-      
     </div>
     <img class="left-dots-grp" src="{{url_for('static',filename='g72.png')}}">
     <img class="groupphoto" src="{{url_for('static',filename='group.png')}}" />
@@ -147,6 +146,48 @@
       <img class="orange-rectangle" src="{{url_for('static',filename='Rectangle 1780.png')}}"/>
     </div>
     <script>
+      // $('#imagebutton').click(function () {
+      //   $('#imagecontent').css({
+      //     'background-color': 'red',
+      //     'color': 'white',
+      //     'font-size': '44px'
+      //   });
+        
+      //   console.log(":HelloWorl")
+      // });
+
+      // $('#imagebutton').hover(function () {
+        
+      //     $('#imagecontent').css({
+      //       'background-color': 'red',
+      //       'color': 'white',
+      //       'font-size': '44px'
+      //     });
+      //     console.log(":HelloWorl")
+      //   });
+
+         $(document).ready(function () {
+
+            $('#imagebutton').hover(
+
+              function () {
+                $('#imagecontent').css({ "opacity": 1 });
+              },
+
+              function () {
+                $('#imagecontent').css({ "opacity": 0 });
+              }
+            );
+            $('#imagebutton').click(
+
+             function () {
+                $('#imagecontent').css({ "opacity": 1 });
+              },
+           );
+
+          });
+      
+      
       var imagebutton = document.getElementById('imagebutton');
            var imagecontent = document.getElementById('imagecontent');
            imagebutton.addEventListener('click', function() {
