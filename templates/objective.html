@@ -8,96 +8,218 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    body: ['"Montserrat"'],
+                },
+                listStyleType: {
+                    none: 'none',
+                    square: 'square',
+                    roman: 'upper-roman',
+                    arrow: 'space-counter',
+                },
+                extend: {
+                    backgroundImage: {
+                        navPattern: "url('/images/Vector1_.png')",
+                    },
+                    colors: {
+                        DarkBlue: "#0F2749",
+                        DarkOrgane: "#F37E27",
+                    },
+                },
+            },
+        };
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static',filename='objective.css')}}">
+    <!-- <link rel="stylesheet" href="{{url_for('static',filename='objective.css')}}"> -->
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-        <div class="overlap1">
-            <img class="iiit-new1-1" src="{{url_for('static',filename='iiit-new1 1.png')}}"  />
-            <div class="m1">
-                <img class="logouticon" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
-                <div class="m2" id="imagecontent">
-                    <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
-                    <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
+
+
+        <div class="overlap1-c">
+            <img class="w-24 h-auto" src="{{url_for('static',filename='Icon.png')}}" />
+            <div class="flex gap-4">
+                <div class="">
+                    <img class="h-10" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+                    <div class="m2" id="imagecontent">
+                        <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
+                        <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
+                    </div>
+                </div>
+                <div class="w-10 md:w-0">
+                    <img class="h-10" id="hamburg" src="{{url_for('static',filename='menu-04.png')}}" />
                 </div>
             </div>
         </div>
-        <div class="scrollmenu">
-            <a href="{{ url_for('about') }}" >Home</a>
-            <a href="{{ url_for('objective') }}" class="active" >Objectives</a>
-            <a href="{{ url_for('consortium') }}" >Consortium Members</a>
-            <a href="{{ url_for('documents') }}">Documents</a>
-            <a target="_self" href="https://himgangycanvas.iiithcanvas.com/">Applications</a>
-            <a href="{{ url_for('userleaderboard') }}">Leader Board</a>
+            <div id="mobilecontent" class="w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-200 overflow-x-auto">
+                <div class="m-auto">
+                    <div class="flex flex-column text-center font-bold text-2xl gap-10 pt-10">
+                        <a href="{{ url_for('about') }}"
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
+                        <a href="{{ url_for('objective') }}"
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+                        <a href="{{ url_for('consortium') }}"
+                            class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
+                            Members</a>
+                        <a href="{{ url_for('documents') }}"
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
+                        <a target="_self" href="https://himgangycanvas.iiithcanvas.com/"
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
+                        <a href="{{ url_for('userleaderboard') }}"
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader
+                            Board</a>
+                    </div>
+                </div>
+            </div>
+            <div class="md:h-auto md:w-full flex gap-3 bg-DarkBlue font-semibold font-body py-2 overflow-x-auto h-0 w-0">
+                <div class="mx-auto gap-5 md:gap-16 lg:gap-30 flex flex-row my-1">
+                    <a href="{{ url_for('about') }}"
+                        class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
+                    <a href="{{ url_for('objective') }}"
+                        class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+                    <a href="{{ url_for('consortium') }}"
+                        class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
+                        Members</a>
+                    <a href="{{ url_for('documents') }}"
+                        class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
+                    <a target="_self" href="https://himgangycanvas.iiithcanvas.com/"
+                        class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
+                    <a href="{{ url_for('userleaderboard') }}"
+                        class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader
+                        Board</a>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto">
+<div class="max-w-7xl mx-auto font-body">
+        <div class="flex flex-row gap-12 overflow-x-scroll h-40 mt-10">
+            <img class="w-30" id="img1" src="{{url_for('static',filename='objective1.png')}}" />
+            <img class="" id="img2" src="{{url_for('static',filename='objective2.png')}}" />
+            <img class="" id="img3" src="{{url_for('static',filename='objective3.png')}}" />
+            <img class="" id="img4" src="{{url_for('static',filename='objective4.png')}}" />
+            <img class="" id="img5" src="{{url_for('static',filename='objective5.png')}}" />
         </div>
-        <div class="row">
-            <img class="group_images" id="img1" src="{{url_for('static',filename='objective1.png')}}"/>
-            <img class="group_images" id="img2" src="{{url_for('static',filename='objective2.png')}}"/>
-            <img class="group_images" id="img3" src="{{url_for('static',filename='objective3.png')}}"/>
-            <img class="group_images" id="img4" src="{{url_for('static',filename='objective4.png')}}"/>
-            <img class="group_images" id="img5" src="{{url_for('static',filename='objective5.png')}}"/>
-            
-            <img class="arrow_images" src="{{url_for('static',filename='objective arrow.png')}}"/>
-        </div>
-          
-          <div class="selected-image"></div>
-            <div class="content-display">
-                <div class="image-content" id="content1">
-                    Aim of the Project<br>
-                    <span> <img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/> &nbsp;&nbsp;To build bidirectional English-IL and IL-IL machine translation (IL-ILMT) systems for<span1> English<->Hindi, English<->Telugu </span1> and 9 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indian language pairs (<span1>Hindi <-> Punjabi, Telugu, Urdu, Gujarati, Kannada, Odia, Kashmiri, Sindhi and Dogri</span1>) which can be easily<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; integrated into a Speech to Speech Machine Translation System (SSMT) pipeline .<br></span>
+
+        <div class="">
+            <div class="image-content" id="content1">
+                <div class="m-5">
+<h3 class="font-bold text-2xl mt-10 ">Aim of the Project</h3>
+<ul class="list-square list-inside ">
+    <li>To build
+        bidirectional English-IL and IL-IL machine translation (IL-ILMT) systems for<span1> English<->Hindi,
+                English<->Telugu </span1> and 9 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indian language pairs
+        (<span1>Hindi <-> Punjabi, Telugu, Urdu, Gujarati, Kannada, Odia, Kashmiri, Sindhi and Dogri</span1>) which
+        can be easily<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; integrated into a Speech to Speech Machine Translation
+        System (SSMT) pipeline .<br></span></li>
+    <li>Domain adapt
+        the systems for the following domains and their subdomains : Governance; Educational Content in the fields
+        of Science <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and Technology (Biology, Chemistry, Physics, Environmental
+        Science, Computer Science Engineering, Electrical Engineering,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanical
+        Engineering), Law, Economics, Management; Health Care (Consent Forms and Information Sheets, Awareness and
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pharma); Judiciary (Case Files); Agriculture and Food Security
+    </li>
+</ul>
+                </div>
+               
+            </div>
+            <div class="image-content" id="content2">
+                Corpora Development<br>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;Parallel
+                    Corpora Development: We will develop 800k parallel corpora in 11 language pairs in the following two domains
+                    in the<br>&nbsp;&nbsp;&nbsp;&nbsp; project.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;Governance<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;Health Care<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;–
+                    Consent Forms and Information Sheet<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;–
+                    Awareness and Pharma<br>
+        
+                </span>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;The corpora
+                    will be developed using the following 3 methods.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;End-to-End (E2E) Translation -
                     <br>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;Domain adapt the systems for the following domains and their subdomains : Governance; Educational Content in the fields of Science <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and Technology (Biology, Chemistry, Physics, Environmental Science, Computer Science Engineering, Electrical Engineering,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanical Engineering), Law, Economics, Management; Health Care (Consent Forms and Information Sheets, Awareness and <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pharma); Judiciary (Case Files); Agriculture and Food Security</span>   
-                </div>
-                <div class="image-content" id="content2">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;Back Translation -<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;Collecting existing corpora
+                    and cleaning<br>
+        
+                </span>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;Annotated
                     Corpora Development<br>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;Parallel Corpora Development: We will develop 800k parallel corpora in 11 language pairs in the following two domains in the<br>&nbsp;&nbsp;&nbsp;&nbsp; project.<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;Governance<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;Health Care<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;– Consent Forms and Information Sheet<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;– Awareness and Pharma<br>
-                         
-                    </span>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;The corpora will be developed using the following 3 methods.<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;End-to-End (E2E) Translation - <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;Back Translation -<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;Collecting existing corpora and cleaning<br>
-                      
-                    </span>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;Annotated Corpora Development<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;We will develop 198k annotated corpora (POS, CHunk, Morph, NER) across 11 languages.<br>
-
-                    </span>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;Domain Dictionary Development<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;We will develop domain dictionaries for 11 languages.<br>
-
-                    </span>
-                </div>
-                <div class="image-content" id="content3">
-                    Evaluation methods and Benchmarks<br>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;To evaluate Machine Translation systems, the project, in addition to making use of existing metrics, will propose novel metrics, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods, and tools, wherever the current methodologies are found to be lacking.<br>
-
-                    </span>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;Benchmark data Development<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="rightarrow" src="{{url_for('static',filename='dot.png')}}"/>&nbsp;In this project, we work towards jotting down guidelines (considering language properties along with best practices) for<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; preparing benchmark data-set for machine translation and its components.<br>
-
-                    </span>
-
-                </div>
-                <div class="image-content" id="content4">
-                    Productization and deployment<br>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;The productization will be carried out by an engineering team set up specially to translate the lab technologies into products and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;also develop related technical solutions. The Academic Institutes will develop the core technology. For the field usable systems/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules, the engineering team will engage with a large number of Startups and other agencies to make the technology ready for<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use and also provide the required services in the field using the developed technology. The engineering team will connect<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;research with markets, and startups with research..<br>
-
-                    </span>
-                    
-                </div>
-                <div class="image-content" id="content5">
-                    Workshops/Training<br>
-                    <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}"/>&nbsp;&nbsp;One of the objectives of the project is to take the systems to the field where these will actually be used by users. Along with it,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the goal is to reduce human effort in the task of translation with the support of technology. In order to do that, one has to familiarize<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the respective language experts community with the developed tools and technologies. Therefore, the project proposes to have<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiple workshops for language experts (translators) and technology developers. For such workshops, guidelines, handouts and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;respective educational content will be created and distributed.<br>
-
-                    </span>
-                </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;We will develop 198k annotated
+                    corpora (POS, CHunk, Morph, NER) across 11 languages.<br>
+        
+                </span>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;Domain
+                    Dictionary Development<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;We will develop domain
+                    dictionaries for 11 languages.<br>
+        
+                </span>
             </div>
+            <div class="image-content" id="content3">
+                Evaluation methods and Benchmarks<br>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;To evaluate
+                    Machine Translation systems, the project, in addition to making use of existing metrics, will propose novel
+                    metrics, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods, and tools, wherever the current
+                    methodologies are found to be lacking.<br>
+        
+                </span>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;Benchmark data
+                    Development<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                        class="rightarrow" src="{{url_for('static',filename='dot.png')}}" />&nbsp;In this project, we work
+                    towards jotting down guidelines (considering language properties along with best practices)
+                    for<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    preparing benchmark data-set for machine translation and its components.<br>
+        
+                </span>
+        
+            </div>
+            <div class="image-content" id="content4">
+                Productization and deployment<br>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;The
+                    productization will be carried out by an engineering team set up specially to translate the lab technologies
+                    into products and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;also develop related technical solutions. The
+                    Academic Institutes will develop the core technology. For the field usable
+                    systems/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules, the engineering team will engage with a large
+                    number of Startups and other agencies to make the technology ready
+                    for<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use and also provide the required services in the field using the
+                    developed technology. The engineering team will connect<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;research with
+                    markets, and startups with research..<br>
+        
+                </span>
+        
+            </div>
+            <div class="image-content" id="content5">
+                Workshops/Training<br>
+                <span><img class="rightarrow" src="{{url_for('static',filename='rightarrow.png')}}" />&nbsp;&nbsp;One of the
+                    objectives of the project is to take the systems to the field where these will actually be used by users.
+                    Along with it,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the goal is to reduce human effort in the task of
+                    translation with the support of technology. In order to do that, one has to
+                    familiarize<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the respective language experts community with the
+                    developed tools and technologies. Therefore, the project proposes to
+                    have<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiple workshops for language experts (translators) and
+                    technology developers. For such workshops, guidelines, handouts
+                    and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;respective educational content will be created and
+                    distributed.<br>
+        
+                </span>
+            </div>
+        </div>
+                </div>
+                </div>
+
             <div class="overlap-footer-c">
                 <div class="lang">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India</div>
                 <div class="contact">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class="m" src="{{url_for('static',filename='msg-icon.png')}}">&nbsp;&nbsp;&nbsp;&nbsp;1trc.office1@iiit.ac.in <br><img class="m" src="{{url_for('static',filename='call-icon.png')}}">&nbsp;&nbsp;&nbsp;&nbsp;+9140-6653 1581<br><img class="m" src="{{url_for('static',filename='tele-icon.png')}}">&nbsp;&nbsp;&nbsp;&nbsp;+9140-6653 1413</div>
@@ -173,11 +295,26 @@
 
 
   
-         var imagebutton = document.getElementById('imagebutton');
-                 var imagecontent = document.getElementById('imagecontent');
-                 imagebutton.addEventListener('click', function() {
-                     imagebutton.classList.toggle('open');
-                 });
+                    var imagebutton = document.getElementById('imagebutton');
+                        var imagecontent = document.getElementById('imagecontent');
+                        imagebutton.addEventListener('click', function () {
+                            imagebutton.classList.toggle('open');
+                        });
+
+                        var mobilemenu = false
+
+                        var hambutton = document.getElementById('hamburg');
+                        var hamcontent = document.getElementById('mobilecontent');
+                        hambutton.addEventListener('click', function () {
+                            // hambutton.classList.toggle('open');
+                            mobilemenu = !mobilemenu
+                            if (mobilemenu) {
+                                hamcontent.className = "w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+                            }
+                            else {
+                                hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+                            }
+                        });
          
          </script>
     </body>
