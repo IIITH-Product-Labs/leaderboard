@@ -36,7 +36,7 @@ ucount=1
 
 #pages rendering
 
-@app.route('/about')
+@app.route('/')
 def about():
     return render_template('about.html')
 @app.route('/objective')
