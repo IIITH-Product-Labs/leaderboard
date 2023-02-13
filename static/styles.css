@@ -2669,7 +2669,7 @@ border-radius: 6px;
 
 /*------------------footer------------------------------*/
 .overlap-footer-c{
-	height: 250px;
+	/* height: 250px; */
 	position: relative;
 	width: 100%;
     margin-top:8%;
