@@ -4,7 +4,7 @@
     <title>Documents Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a46b5c1927.js" crossorigin="anonymous"></script>
@@ -32,91 +32,53 @@
     <link rel="stylesheet" type="text/css" href="docs.css">
     <!--  -->
     <link rel="stylesheet" href="{{url_for('static',filename='docs.css')}}">
-    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">  
     
   </head>
   <body>
-    <div> 
-        <div class="overlap1-c">
-              <img
-                class="w-24 h-auto"
-                src="{{url_for('static',filename='Icon.png')}}"
-              />
-              <div class="flex gap-4">
-              <div class="">
-                <img class="h-10 md:mr-5 mr-0" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
-                <div class="m2" id="imagecontent">
+    <div class="overlap1-c">
+      <img class="w-24 h-auto" src="{{url_for('static',filename='Icon.png')}}" />
+      <div class="flex gap-4">
+          <div class="">
+              <img class="h-10" id="imagebutton" src="{{url_for('static',filename='logout icon.png')}}" />
+              <div class="m2" id="imagecontent">
                   <a href="{{ url_for('signin') }}" class="dropdown-c1"><span>Sign In</span></a>
                   <a href="{{ url_for('signout') }}" class="dropdown-c1"><span>Sign Out</span></a>
-                </div>
               </div>
-              <div class="w-10 md:w-0">
-                <img class="h-10" id="hamburg" src="{{url_for('static',filename='menu-04.png')}}" />
-              </div>
-              </div>
-            </div>
+          </div>
+          <div class="w-10 md:w-0">
+              <img class="h-10" id="hamburg" src="{{url_for('static',filename='menu-04.png')}}" />
+          </div>
+      </div>
+  </div>
 
+<div id="mobilecontent" class="w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-200 overflow-x-auto">
+  <div class="m-auto">
+    <div class="flex flex-column text-center font-bold text-2xl gap-10 pt-10">
+      <a href="{{ url_for('about') }}"class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
+      <a href="{{ url_for('objective') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+      <a href="{{ url_for('consortium') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium Members</a>
+      <a href="{{ url_for('documents') }}" class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
+      <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
+      <a href="{{ url_for('userleaderboard') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader Board</a>
     </div>
+  </div>
+</div>
+<div class="md:h-auto md:w-full flex gap-3 bg-DarkBlue font-semibold font-body py-2 overflow-x-auto h-0 w-0">
+  <div class="mx-auto gap-5 md:gap-16 lg:gap-30 flex flex-row my-1">
+    <a href="{{ url_for('about') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
+    <a href="{{ url_for('objective') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+    <a href="{{ url_for('consortium') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium Members</a>
+    <a href="{{ url_for('documents') }}" class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
+    <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
+    <a href="{{ url_for('userleaderboard') }}" class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader Board</a>
+  </div>
+</div>
+
     
-    
-    <div id="mobilecontent" class="w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-200 overflow-x-auto">
-      <div class="m-auto">
-        <div class="flex flex-column text-center font-bold text-2xl gap-10 pt-10">
-          <a href="{{ url_for('about') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
-          <a href="{{ url_for('objective') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
-          <a href="{{ url_for('consortium') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
-            Members</a>
-          <a href="{{ url_for('documents') }}"
-            class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
-          <a target="_self" href="https://himgangycanvas.iiithcanvas.com/"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
-          <a href="{{ url_for('userleaderboard') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader
-            Board</a>
-        </div>
-      </div>
-      </div>
   
-      <div
-        class="  md:h-auto md:w-full flex gap-3 bg-DarkBlue font-semibold font-body py-2 overflow-x-auto h-0 w-0"
-      >
-        <div class="mx-auto gap-5 md:gap-16 lg:gap-30 flex flex-row my-1">
-          <a
-            href="{{ url_for('about') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
-            >Home</a
-          >
-          <a
-            href="{{ url_for('objective') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
-            >Objectives</a
-          >
-          <a
-            href="{{ url_for('consortium') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
-            >Consortium Members</a
-          >
-          <a
-            href="{{ url_for('documents') }}"
-            class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
-            >Documents</a
-          >
-          <a
-            target="_self"
-            href="https://himgangycanvas.iiithcanvas.com/"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
-            >Applications</a
-          >
-          <a
-            href="{{ url_for('userleaderboard') }}"
-            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4"
-            >Leader Board</a
-          >
-        </div>
-      </div>   
+  
+       
     <!-- <div class="overlap-group4-1">
       <img class="iiit-new1-1" src="{{url_for('static',filename='iiit-new1 1.png')}}" />
       <div class="m1">
@@ -135,17 +97,18 @@
       <a target="_self" href="https://himgangycanvas.iiithcanvas.com/">Applications</a>
       <a href="{{ url_for('userleaderboard') }}">Leader Board</a>
     </div> -->
-    <div id="right_grp" ><img src="{{url_for('static',filename='docs-rg.png')}}"></div>
-    <div id="left_grp"><img src="{{url_for('static',filename='docs-lg.png')}}" ></div>
-    <div class="container">
-      <table>
-        <div class="policy-table">
-          <div class="headings">
+
+    <div class="flex  justify-between">
+      <div id="" class="h-full sm:w-10  w-4 " ><img src="{{url_for('static',filename='docs-rg.png')}}">
+      </div>
+      <div class="container sm:mt-10  mt-2">
+        <table>
+          <div class=" w-90% mt-2 mr-4    ">
+            <div class="headings">
             <span class="heading">Name</span>
             <span class="heading">Date</span>
             <span class="heading">Last Edit</span>
             <span class="heading">Type</span>
-           
           </div>
           <div class="policy">
             <span><img class= "gallery" src="{{url_for('static',filename='gallery.png')}}">&nbsp; <a href="https://drive.google.com/drive/folders/1HM434y002oC16ehipBLTaJ041oxaiZL6?usp=sharing"> GoogleSheets</a></span>
@@ -189,9 +152,12 @@
             <span>Last Opened 2hours ago </span>
             <span>JPG file</span>
           </div>
-        </div>
-      </table>
+        </table>
+      </div>
+      <div id=""  class="h-full  sm:w-16  w-6  "><img src="{{url_for('static',filename='docs-lg.png')}}" >
+      </div>
     </div>
+    
     <div id="msg_pic"><img src="{{url_for('static',filename='msg_pic.png')}}" ></div>
     <div id="down_grp"><img src="{{url_for('static',filename='down_grp.png')}}"id="pic"></div>
     <script>
@@ -203,17 +169,14 @@
 
            var mobilemenu = false
            var hambutton = document.getElementById('hamburg');
-        var hamcontent = document.getElementById('mobilecontent');
-        hambutton.addEventListener('click', function () {
-          // hambutton.classList.toggle('open');
-          mobilemenu = !mobilemenu
-          if (mobilemenu) {
-            hamcontent.className="w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+           var hamcontent = document.getElementById('mobilecontent');
+           hambutton.addEventListener('click', function () {// hambutton.classList.toggle('open');
+           mobilemenu = !mobilemenu
+           if (mobilemenu) {
+            hamcontent.className = "w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
           }
           else {
-            hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
-          }
-        });
+            hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"}});
    
    </script>
   </body>

@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body>
+<body>
 
 
         <div class="overlap1-c">
@@ -61,17 +61,16 @@
                         <a href="{{ url_for('about') }}"
                             class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Home</a>
                         <a href="{{ url_for('objective') }}"
-                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
+                            class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Objectives</a>
                         <a href="{{ url_for('consortium') }}"
-                            class="text-white underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Consortium
                             Members</a>
                         <a href="{{ url_for('documents') }}"
                             class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Documents</a>
                         <a target="_self" href="https://himgangycanvas.iiithcanvas.com/"
                             class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Applications</a>
                         <a href="{{ url_for('userleaderboard') }}"
-                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader
-                            Board</a>
+                            class="text-white no-underline decoration-DarkOrgane decoration-DarkOrgane decoration-2 underline-offset-4 hover:underline hover:decoration-DarkOrgane hover:decoration-2 hover:underline-offset-4">Leader Board</a>
                     </div>
                 </div>
             </div>
@@ -96,12 +95,12 @@
             <div class="max-w-7xl mx-auto">
 <div class="max-w-7xl mx-auto  min-h-screen font-body">
     <div class=" ">
-        <div   id="row" class="flex flex-row gap-12 overflow-x-scroll h-40 mt-10">
-            <img class="group_images w-30 " id="img1" src="{{url_for('static',filename='objective1.png')}}" />
-            <img class="group_images w-30 " id="img2" src="{{url_for('static',filename='objective2.png')}}" />
-            <img class="group_images w-30 " id="img3" src="{{url_for('static',filename='objective3.png')}}" />
-            <img class="group_images w-30 " id="img4" src="{{url_for('static',filename='objective4.png')}}" />
-            <img class="group_images w-30 " id="img5" src="{{url_for('static',filename='objective5.png')}}" />
+        <div   id="row" class="flex flex-row md:gap-12 gap-4 overflow-x-scroll sm:h-40  h-32  p-4 ">
+            <img class="group_images   " id="img1" src="{{url_for('static',filename='objective1.png')}}" />
+            <img class="group_images   " id="img2" src="{{url_for('static',filename='objective2.png')}}" />
+            <img class="group_images   " id="img3" src="{{url_for('static',filename='objective3.png')}}" />
+            <img class="group_images   " id="img4" src="{{url_for('static',filename='objective4.png')}}" />
+            <img class="group_images   " id="img5" src="{{url_for('static',filename='objective5.png')}}" />
         </div>
             <div class="image-content m-5" id="content1">
                 <text class="text-2xl font-bold mt-10 "> Aim of the Project </text><br>
@@ -233,44 +232,33 @@
   
         </div>
 
-        <div class=" footer text-white bg-DarkBlue  flex align-bottom  justify-between  pt-2 sm:pt-4 mb-0 ">
-      
-            <img class="flex-none lg:w-40 md:w-24  w-8 h-auto mt-auto  " src="{{url_for('static',filename='Rectangle 2.png')}}"/> 
-               
-            <div class=" flex-grow justify-between flex-col  fontFamily-Montserrat  content-left lg:text-xl md:text-s text-xs">
-
-
-                <div class=" lg:mx-12 w-3/5 sm:my-12  my-4">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
+        <div class=" text-white bg-DarkBlue   font-body flex   justify-between ">
+            <img class="flex-none lg:w-40 md:w-24  w-16 h-auto mt-auto" src="{{url_for('static',filename='Rectangle 2.png')}}"/>
+            <div class="flex-row font-body flex-grow"> 
+              <div class="flex sm:flex-row flex-col   justify-between   content-left   lg:text-xl md:text-s text-xs    ">
+                <div class="   sm:my-8  my-4    break-normal sm:mx-0  mx-auto">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
+                </div>  
+                <div class=" content-left  sm:my-8  my-4 sm:mx-0  mx-auto "> 
+                  <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-xl md:text-s flex  h-4  "> 
+                    <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}"> &nbsp;   trcoffice1@iiit.ac.in 
+                  </div>
+                  <br> 
+                  <div class=" ml-0 lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
+                    <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}"> &nbsp;   +9140-6653 1581 
+                  </div>
+                  <br> 
+                  <text class=" ml-0  lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
+                    <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='tele-icon.png')}}">&nbsp; +9140-6653 1413
+                  </text>
                 </div>
-
-
-
-                <div class=" content-left  sm:my-12  my-4 ">
-                    <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-xl md:text-s flex  h-4  ">
-                        <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}"> &nbsp;   trcoffice1@iiit.ac.in
-                    </div>
-                    <br>
-                    <div class=" ml-0 lg:mx-12 text-xs lg:text-xl md:text-s flex  h-4 ">
-                        <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}"> &nbsp;+9140-6653 1581
-                    </div>
-                    <br>
-                
-                    <div class=" ml-0  lg:mx-12 text-xs lg:text-xl md:text-s flex  h-4 ">
-                        <img class=" md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='tele-icon.png')}}">&nbsp;+9140-6653 1413
-                    </div>
-                </div>
-                
-                
+              </div>
+              <div class="flex-none text-center text-gray-400 text-xs my-1"> 2022 © Copyright ltrc. All Rights Reserved</div>
             </div>
-            <img class="flex-none   my-auto  lg:h-40 md:h-24  h-8  " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
-        </div>
-                  
-                
-                
-          
-                  
-            </div>
-        </div>
+            <img class="flex-none   my-auto  lg:h-40 h-24    " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
+          </div>
+
+
+
         <script>
             $(document).ready(function(){
                 // Show the content of the first image by default
@@ -335,31 +323,22 @@
                 }
             });
             });
-
-
-
-  
-                    var imagebutton = document.getElementById('imagebutton');
-                        var imagecontent = document.getElementById('imagecontent');
-                        imagebutton.addEventListener('click', function () {
-                            imagebutton.classList.toggle('open');
-                        });
-
-                        var mobilemenu = false
-
-                        var hambutton = document.getElementById('hamburg');
-                        var hamcontent = document.getElementById('mobilecontent');
-                        hambutton.addEventListener('click', function () {
-                            // hambutton.classList.toggle('open');
-                            mobilemenu = !mobilemenu
-                            if (mobilemenu) {
-                                hamcontent.className = "w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
-                            }
-                            else {
-                                hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
-                            }
-                        });
-         
+            var imagebutton = document.getElementById('imagebutton');
+            var imagecontent = document.getElementById('imagecontent');
+            imagebutton.addEventListener('click', function () {
+                imagebutton.classList.toggle('open');
+            });
+            var mobilemenu = false
+            var hambutton = document.getElementById('hamburg');
+            var hamcontent = document.getElementById('mobilecontent');
+            hambutton.addEventListener('click', function () {
+            // hambutton.classList.toggle('open');
+            mobilemenu = !mobilemenu
+            if (mobilemenu) {
+                hamcontent.className = "w-full h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"
+            }
+            else {
+                hamcontent.className = "w-0 h-full absolute bg-DarkBlue z-10 ease-in duration-300 overflow-hidden"}});
          </script>
     </body>
 </html>  

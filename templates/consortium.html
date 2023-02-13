@@ -345,39 +345,35 @@
 
 
 
-    <div class=" text-white bg-DarkBlue  flex   justify-between  pt-2 sm:pt-4 ">
-      
-      <img class="flex-none lg:w-40 md:w-24  w-8 h-auto mt-auto  " src="{{url_for('static',filename='Rectangle 2.png')}}"/> 
-     
-      <div class="flex flex-grow justify-between fontFamily-Montserrat  content-left   lg:text-xl md:text-s text-xs    ">
-          <div class=" lg:mx-12 w-3/5 sm:my-12  my-4">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
+    <div class=" text-white bg-DarkBlue   font-body flex   justify-between ">
+      <img class="flex-none lg:w-40 md:w-24  w-16 h-auto mt-auto" src="{{url_for('static',filename='Rectangle 2.png')}}"/>
+      <div class="flex-row font-body flex-grow"> 
+        <div class="flex sm:flex-row flex-col   justify-between   content-left   lg:text-xl md:text-s text-xs    ">
+          <div class="   sm:my-8  my-4    break-normal sm:mx-0  mx-auto">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
           </div>  
-          <div class=" content-left  sm:my-12  my-4 "> 
+          <div class=" content-left  sm:my-8  my-4 sm:mx-0  mx-auto "> 
             <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-xl md:text-s flex  h-4  "> 
               <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}"> &nbsp;   trcoffice1@iiit.ac.in 
             </div>
             <br> 
-            <div class=" ml-0 lg:mx-12 text-xs lg:text-xl md:text-s flex  h-4 "> 
+            <div class=" ml-0 lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
               <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}"> &nbsp;   +9140-6653 1581 
             </div>
             <br> 
-            <text class=" ml-0  lg:mx-12 text-xs lg:text-xl md:text-s flex  h-4 "> 
+            <text class=" ml-0  lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
               <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='tele-icon.png')}}">&nbsp; +9140-6653 1413
             </text>
           </div>
+        </div>
+        <div class="flex-none text-center text-gray-400 text-xs my-1"> 2022 © Copyright ltrc. All Rights Reserved</div>
       </div>
-        
-      
-      <img class="flex-none   my-auto  lg:h-40 md:h-24  h-8  " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
-
-        
+      <img class="flex-none   my-auto  lg:h-40 h-24    " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
     </div>
-    <div class="flex-none text-center text-gray-400 text-xs"> 2022 © Copyright ltrc. All Rights Reserved</div>
-  </div>
+  
   
     <script>
            var imagebutton = document.getElementById('imagebutton');
-            var imagecontent = document.getElementById('imagecontent');
+            var imagecontent = document.getElementById('imagecontent'); 
             imagebutton.addEventListener('click', function () {
               imagebutton.classList.toggle('open');
             });
