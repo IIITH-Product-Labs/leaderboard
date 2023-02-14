@@ -250,19 +250,15 @@
     
     
     .fieldset {
-        float: right;
-       justify-content: right;
-        margin-left: 62.1%;   
-        margin-top: 0.9%;
+        /* float: right; */
+        /* justify-content: right; */
         border: 2px solid  #0F2749;
-        width: 19.5%;
         border-radius: 6px;
         background: rgba(219, 236, 255, 0.7);
-        position:absolute;   
     }
     
     .border-text {
-        width: 132px;
+            
         margin: auto;
         background-color: #ffffff;
         font-family: 'Montserrat';
@@ -271,11 +267,11 @@
         font-size: 15px;
         line-height: 16px;
         /* identical to box height, or 80% */
-        color: #0F2749;
+        color: #0F2749; 
         border: 0px solid #FFFFFF;
     }
     .dropdown{
-        width: 270px;
+      
         overflow: hidden;
         background: no-repeat right #D7E9FF;
         border-top:#D7E9FF 1px solid;
@@ -287,10 +283,10 @@
     
     
     }
-    .dropdown:after {
+    /* .dropdown:after {
         content: "";
-        margin-right: 20%;
-        position: absolute;
+        margin:auto;
+        position: relative;
         right: 0px;
         top: 12.5px;
         width: 0; 
@@ -302,7 +298,7 @@
         border-left: 11px solid transparent;
         border-right: 11px solid transparent;
         border-top: 12px solid #0F2749;
-    }
+    } */
     .select-element {
         box-sizing: border-box;
         border: 0;
@@ -344,6 +340,7 @@
         color:  #FEFEFE;
         background-color: #1e2254;
         min-height: 20px;
+        margin: 4px;
        
         font-family: 'Montserrat';
         font-style: normal;
@@ -366,7 +363,7 @@
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 400;
-        font-size: 18px;
+        
         line-height: 29px;
         /* identical to box height */
     
@@ -411,7 +408,7 @@
         font-size: 18px;
         line-height: 29px;
         /* identical to box height */
-    
+        padding: 10px;
         letter-spacing: -0.04em;
     
         color: #4D4D4D;
@@ -424,6 +421,8 @@
         font-weight: 400;
         font-size: 18px;
         line-height: 29px;
+        padding: 10px;
+
         /* identical to box height */
     
         letter-spacing: -0.04em;
