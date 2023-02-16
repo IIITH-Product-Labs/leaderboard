@@ -102,11 +102,11 @@
             <img class="group_images   " id="img4" src="{{url_for('static',filename='objective4.png')}}" />
             <img class="group_images   " id="img5" src="{{url_for('static',filename='objective5.png')}}" />
         </div>
-            <div class="image-content m-5" id="content1">
-                <text class="text-2xl font-bold mt-10 "> Aim of the Project </text><br>
-                <ul class=" mt-5 "> 
+            <div class="image-content md:m-5 m-3" id="content1">
+                <text class="md:text-xl  text-lg font-bold mt-10 "> Aim of the Project </text><br>
+                <ul class=" mt-4 "> 
                     <li class="list-inside "> 
-                        <span class="flex text-xl font-normal font-wider ">
+                        <span class="flex md:text-lg  text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             <text> 
                             To build bidirectional English-IL and IL-IL machine translation (IL-ILMT) systems for
@@ -114,18 +114,18 @@
                             and 9 Indian language pairs (<text  class="text-blue-500 font-bold" >Hindi <-> Punjabi, Telugu, Urdu, Gujarati, Kannada, Odia, Kashmiri, Sindhi and Dogri</text >) which can be easily integrated into a Speech to Speech Machine Translation System (SSMT) pipeline .</text>
                         </span>
                     </li> 
-                    <li class="my-5"> 
-                        <span class="flex text-xl font-normal font-wider ">
+                    <li class="my-4"> 
+                        <span class="flex md:text-lg text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             Domain adapt the systems for the following domains and their subdomains : Governance; Educational Content in the fields of Science and Technology (Biology, Chemistry, Physics, Environmental Science, Computer Science Engineering, Electrical Engineering,Mechanical Engineering), Law, Economics, Management; Health Care (Consent Forms and Information Sheets, Awareness and Pharma); Judiciary (Case Files); Agriculture and Food Security
                         </span>                        
                     </li> 
                 </ul>
             </div>
-            <div class="image-content m-5" id="content2">
-                <text class="text-2xl font-bold mt-10"> Corpora Development   </text> 
-                <ul class=" mt-5 "> 
-                    <li class="my-5 flex text-xl font-normal font-wider"> 
+            <div class="image-content md:m-5 m-3" id="content2">
+                <text class="md:text-xl  text-lg font-bold mt-10"> Corpora Development   </text> 
+                <ul class=" mt-4 "> 
+                    <li class="my-2 flex md:text-lg text-md font-normal font-wider"> 
                          <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             <div> Parallel Corpora Development: We will develop 800k parallel corpora in 11 language pairs in the following two domains in the project 
                                 <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -139,7 +139,7 @@
                                 </ul>
                             </div>                       
                     </li>
-                    <li class="my-5 flex text-xl font-normal font-wider"> 
+                    <li class="my-4 flex text-lg font-normal font-wider"> 
                         <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                            <div> The corpora will be developed using the following 3 methods.
                                <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -149,7 +149,7 @@
                                 </ul>
                             </div>
                         </li> 
-                    <li class="my-5 flex text-xl font-normal font-wider"> 
+                    <li class="my-4 flex text-lg font-normal font-wider"> 
                         <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                        <div>Annotated Corpora Development
                            <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -158,7 +158,7 @@
                            </ul>
                        </div>
                     </li>
-                    <li class="my-5 flex text-xl font-normal font-wider"> 
+                    <li class="my-4 flex text-lg font-normal font-wider"> 
                         <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                        <div>Domain Dictionary Development
                            <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -169,17 +169,17 @@
                     </li>   
                 </ul>
             </div>
-            <div class="image-content  m-5 mt-10 " id="content3">
-                <text class="text-2xl font-bold mt-10 ">  Evaluation methods and Benchmarks</text><br>
-                <ul class=" mt-5 "> 
+            <div class="image-content md:m-5 m-3" id="content3">
+                <text class=" md:text-xl text-lg font-bold mt-10 ">  Evaluation methods and Benchmarks</text><br>
+                <ul class=" mt-4 "> 
                     <li class="list-inside "> 
-                        <span class="flex text-xl font-normal font-wider ">
+                        <span class="flex md:text-lg text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                                 To evaluate Machine Translation systems, the project, in addition to making use of existing metrics, will propose novel metrics, methods, and tools, wherever the current methodologies are found to be lacking.
                         </span>
                     </li> 
-                    <li class="my-5"> 
-                        <div class="flex text-xl font-normal font-wider">
+                    <li class="my-4"> 
+                        <div class="flex md:text-lg text-md font-normal font-wider">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             <div> Benchmark data Development<br> 
                             <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -194,35 +194,41 @@
                     </li> 
                 </ul>
             </div>
-            <div class="image-content m-5 mt-10 " id="content4">
-               
-                <text class="text-2xl font-bold mt-10 ">  Productization and deployment</text><br>
-                
-                <span class="flex text-xl font-normal   font-wider  mt-10 ">
-                    <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
-                    <ul class=" ">
-                        <li> 
-                            The productization will be carried out by an engineering team set up specially to translate the lab technologies
-                            into products and also develop related technical solutions. The Academic Institutes will develop the core technology. For the field usable systems/modules, the engineering team will engage with a large number of Startups and other agencies to make the technology ready for use and also provide the required services in the field using the developed technology. The engineering team will connect research with markets, and startups with research..
-                        </li> 
-                    </ul>
-        
-                </span>
-        
+            <div class="image-content md:m-5 m-3" id="content4">
+                <text class="md:text-xl  text-lg font-bold mt-10 "> Productization and deployment </text><br>
+                <ul class=" mt-4 ">
+                    <li class="list-inside ">
+                        <span class="flex md:text-lg  text-md font-normal font-wider ">
+                            <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}" />
+                            <text>
+                                The productization will be carried out by an engineering team set up specially to translate the lab technologies
+                                into products and also develop related technical solutions. The Academic Institutes will develop the core technology.
+                                For the field usable systems/modules, the engineering team will engage with a large number of Startups and other
+                                agencies to make the technology ready for use and also provide the required services in the field using the developed
+                                technology. The engineering team will connect research with markets, and startups with research..
+                            </text>
+                        </span>
+                    </li>
+                    
+                </ul>
             </div>
-            <div class="image-content m-5 mt-10 " id="content5">
-                
-                   <text class="text-2xl font-bold mt-10 ">  Workshops/Training </text><br>
-                    <span class="flex text-xl font-normal font-  font-wider mt-10">
-                        <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
-                        <ul class=" ">
-                            <li> 
-                                One of the objectives of the project is to take the systems to the field where these will actually be used users Along with it,the goal is to reduce human effort in the task of translation with the support of technology. In order to do that, one has to familiarize the respective language experts community with the developed tools and technologies. Therefore, the project proposes to have multiple workshops for language experts (translators) and technology developers. For such workshops, guidelines, handouts and respective educational content will be created and distributed.
-                            </li> 
-                        </ul>
+            <div class="image-content md:m-5 m-3" id="content5">
+                <text class="md:text-xl  text-lg font-bold mt-10 "> Workshops/Training </text><br>
+                <ul class=" mt-4 ">
+                    <li class="list-inside ">
+                        <span class="flex md:text-lg  text-md font-normal font-wider ">
+                            <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}" />
+                            <text>
+                                One of the objectives of the project is to take the systems to the field where these will actually be used users Along
+                                with it,the goal is to reduce human effort in the task of translation with the support of technology. In order to do
+                                that, one has to familiarize the respective language experts community with the developed tools and technologies.
+                                Therefore, the project proposes to have multiple workshops for language experts (translators) and technology developers.
+                                For such workshops, guidelines, handouts and respective educational content will be created and distributed.
+                            </text>
+                        </span>
+                    </li>
             
-                    </span>    
-                
+                </ul>
             </div>
         </div>
     </div>
@@ -232,30 +238,40 @@
   
         </div>
 
-        <div class=" text-white bg-DarkBlue   font-body flex   justify-between ">
-            <img class="flex-none lg:w-40 md:w-24  w-16 h-auto mt-auto" src="{{url_for('static',filename='Rectangle 2.png')}}"/>
-            <div class="flex-row font-body flex-grow"> 
-              <div class="flex sm:flex-row flex-col   justify-between   content-left   lg:text-xl md:text-s text-xs    ">
-                <div class="   sm:my-8  my-4    break-normal sm:mx-0  mx-auto">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
-                </div>  
-                <div class=" content-left  sm:my-8  my-4 sm:mx-0  mx-auto "> 
-                  <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-xl md:text-s flex  h-4  "> 
-                    <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}"> &nbsp;   trcoffice1@iiit.ac.in 
-                  </div>
-                  <br> 
-                  <div class=" ml-0 lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
-                    <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}"> &nbsp;   +9140-6653 1581 
-                  </div>
-                  <br> 
-                  <text class=" ml-0  lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
-                    <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='tele-icon.png')}}">&nbsp; +9140-6653 1413
-                  </text>
+    <div class=" text-white bg-DarkBlue   font-body flex   justify-between ">
+        <img class="flex-none lg:w-40 md:w-24  w-16 h-auto mt-auto"
+            src="{{url_for('static',filename='Rectangle 2.png')}}" />
+        <div class="flex-row  font-body flex-grow">
+            <div
+                class="flex flex-end sm:flex-row flex-col   justify-between   content-left   lg:text-md md:text-s text-xs    ">
+                <div class="   sm:my-8  my-4    break-normal sm:mx-0  ">Language Technologies Research Centre (LTRC)<br>1st
+                    Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology,
+                    Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India
                 </div>
-              </div>
-              <div class="flex-none text-center text-gray-400 text-xs my-1"> 2022 © Copyright ltrc. All Rights Reserved</div>
+                <div class=" content-left  sm:my-8  my-4 sm:mx-0  ">
+                    <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-md md:text-sm flex  h-4  ">
+                        <img class="m md:h-4 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}">
+                        &nbsp;
+                        trcoffice1@iiit.ac.in
+                    </div>
+                    <br>
+                    <div class=" ml-0 lg:mx-8 text-xs lg:text-md md:text-sm flex  h-4 ">
+                        <img class="m md:h-4 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}">
+                        &nbsp;
+                        +9140-6653 1581
+                    </div>
+                    <br>
+                    <text class=" ml-0  lg:mx-8 text-xs lg:text-md md:text-sm flex  h-4 ">
+                        <img class="m md:h-4 w-auto  h-2 my-auto "
+                            src="{{url_for('static',filename='tele-icon.png')}}">&nbsp;
+                        +9140-6653 1413
+                    </text>
+                </div>
             </div>
-            <img class="flex-none   my-auto  lg:h-40 h-24    " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
-          </div>
+            <div class="flex-none text-center text-gray-400 text-xs my-1"> 2022 © Copyright ltrc. All Rights Reserved</div>
+        </div>
+        <img class="flex-none   my-auto  lg:h-40 h-24    " src="{{url_for('static',filename='Rectangle 1780.png')}}" />
+    </div>
 
 
 

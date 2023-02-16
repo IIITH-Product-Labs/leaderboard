@@ -126,7 +126,7 @@
       <!-- Hero  -->
       
       
-        <img class="bg-contain mx-auto  p-4 lg:p-10" src="{{url_for('static',filename='HomePage.gif')}}" />
+        <img class="bg-contain mx-auto sm:h-64 h-40 w-auto p-4 lg:p-10" src="{{url_for('static',filename='HomePage.gif')}}" />
       <div class="max-w-screen-xl mb-10   mx-auto  ">
         <div class=" bg-sky-100  rounded-t-2xl  mx-10 ">
 
@@ -135,11 +135,11 @@
           </div>
           
           <div class=" w-full text-center pt-2  "> 
-            <text class="sm:text-xl text-l  font-semibold tracking-tighter	 ">
+            <text class="sm:text-xl text-lg  font-semibold tracking-tighter	 ">
               INDIAN LANGUAGE TO INDIAN LANGUAGE MACHINE TRANSLATION </text> 
           </div>
           <div class="text-center pt-2 pb-2"> 
-            <text class="sm:text-l text-md  font-normal  tracking-wider"  > 
+            <text class= " md:text-md sm:text-lgg text-sm  text-md  font-normal  tracking-wider"  > 
             <span >Part of Speech-to-Speech Machine Translation under BHASHINI, </span >
             <br>
             <span >Funded by MeitY, Govt. of India</span>
@@ -147,19 +147,19 @@
           </div>
             
               <div class="bg-white w-full  py-2">
-                <div class="text-3xl lg:ml-16  ml-0  text-orange-500 font font-semibold w-40 border-orange-500 border-b-2 border-opacity-25" >About
+                <div class="text-2xl lg:ml-16  ml-0  text-orange-500 font font-semibold w-40 border-orange-500 border-b-2 border-opacity-25" >About
                 </div>
               </div>
-          <div class=" sm:mx-24 mx-2  sm:text-l text-md font-light tracking-wider  py-2 ">
-            <div class=" relative  md:mx-10 ">HIMANGY (HIndustani Machini ANuvaad TechnoloGY) is an Indian Language to Indian Language Machine Translation project. It is a consortium based project under BHASHINI and is funded by Ministry of Electronics and Information Technology (Meity), Government of India. IIIT-Hyderabad is the lead institute of the project.</div>
+          <div class=" sm:mx-24 mx-2   font-light tracking-wider  py-2 ">
+            <div class=" relative  md:mx-10  lg:text-lgg  md:text-md  text-sm ">HIMANGY (HIndustani Machini ANuvaad TechnoloGY) is an Indian Language to Indian Language Machine Translation project. It is a consortium based project under BHASHINI and is funded by Ministry of Electronics and Information Technology (Meity), Government of India. IIIT-Hyderabad is the lead institute of the project.</div>
           </div>
           <div class="">
             <div class="bg-white w-full py-2">
-              <div class="text-3xl  lg:ml-16  ml-0  text-orange-500 font font-semibold sm:w-96    border-orange-500 border-b-2 border-opacity-25" >Try our MT Systems 
+              <div class="text-2xl  lg:ml-16  ml-0  text-orange-500 font font-semibold sm:w-96    border-orange-500 border-b-2 border-opacity-25" >Try our MT Systems 
               </div>
             </div>
         
-        <div class="flex flex-col sm:flex-row pt-4 p-10">
+        <div class="flex flex-col sm:flex-row pt-4 sm:p-10 p-4">
           <a href="https://bhashini.gov.in/en/">
             <img class="pl-10 " src="{{url_for('static',filename='u_i_1.png')}}"/>
           </a>
@@ -175,30 +175,35 @@
         
        
       </div> 
-        
+        <!-- footer -->
       <div class=" text-white bg-DarkBlue   font-body flex   justify-between ">
-        <img class="flex-none lg:w-40 md:w-24  w-16 h-auto mt-auto" src="{{url_for('static',filename='Rectangle 2.png')}}"/>
-        <div class="flex-row font-body flex-grow"> 
-          <div class="flex sm:flex-row flex-col   justify-between   content-left   lg:text-xl md:text-s text-xs    ">
-            <div class="   sm:my-8  my-4    break-normal sm:mx-0  mx-auto">Language Technologies Research Centre (LTRC)<br>1st Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology, Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India  
-            </div>  
-            <div class=" content-left  sm:my-8  my-4 sm:mx-0  mx-auto "> 
-              <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-xl md:text-s flex  h-4  "> 
-                <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}"> &nbsp;   trcoffice1@iiit.ac.in 
+        <img class="flex-none lg:w-40 md:w-24  w-16 h-auto mt-auto" src="{{url_for('static',filename='Rectangle 2.png')}}" />
+        <div class="flex-row  font-body flex-grow">
+          <div class="flex flex-end sm:flex-row flex-col   justify-between   content-left   lg:text-md md:text-s text-xs    ">
+            <div class="   sm:my-8  my-4    break-normal sm:mx-0  ">Language Technologies Research Centre (LTRC)<br>1st
+              Floor, Kohli Center on Intelligent Systems (KCIS)<br> International Institute of Information Technology,
+              Hyderabad <br>Gachibowli, Hyderabad, Telangana - 500 032<br> India
+            </div>
+            <div class=" content-left  sm:my-8  my-4 sm:mx-0  ">
+              <div class=" ml-0 lg:mx-12 mx-0 text-xs lg:text-md md:text-sm flex  h-4  ">
+                <img class="m md:h-4 w-auto  h-2 my-auto " src="{{url_for('static',filename='msg-icon.png')}}"> &nbsp;
+                trcoffice1@iiit.ac.in
               </div>
-              <br> 
-              <div class=" ml-0 lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
-                <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}"> &nbsp;   +9140-6653 1581 
+              <br>
+              <div class=" ml-0 lg:mx-8 text-xs lg:text-md md:text-sm flex  h-4 ">
+                <img class="m md:h-4 w-auto  h-2 my-auto " src="{{url_for('static',filename='call-icon.png')}}"> &nbsp;
+                +9140-6653 1581
               </div>
-              <br> 
-              <text class=" ml-0  lg:mx-8 text-xs lg:text-xl md:text-s flex  h-4 "> 
-                <img class="m md:h-6 w-auto  h-2 my-auto " src="{{url_for('static',filename='tele-icon.png')}}">&nbsp; +9140-6653 1413
+              <br>
+              <text class=" ml-0  lg:mx-8 text-xs lg:text-md md:text-sm flex  h-4 ">
+                <img class="m md:h-4 w-auto  h-2 my-auto " src="{{url_for('static',filename='tele-icon.png')}}">&nbsp;
+                +9140-6653 1413
               </text>
             </div>
           </div>
           <div class="flex-none text-center text-gray-400 text-xs my-1"> 2022 © Copyright ltrc. All Rights Reserved</div>
         </div>
-        <img class="flex-none   my-auto  lg:h-40 h-24    " src="{{url_for('static',filename='Rectangle 1780.png')}}"/> 
+        <img class="flex-none   my-auto  lg:h-40 h-24    " src="{{url_for('static',filename='Rectangle 1780.png')}}" />
       </div>
     </div>
 
