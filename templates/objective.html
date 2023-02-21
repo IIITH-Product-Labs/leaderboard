@@ -33,7 +33,7 @@
         };
     </script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,500,600" rel="stylesheet">
-    <!--  <link rel="stylesheet" href="{{url_for('static',filename='objective.css')}}"> -->
+     <!-- <link rel="stylesheet" href="{{url_for('static',filename='objective.css')}}"> -->
     <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -94,7 +94,7 @@
             </div>
             <div class="max-w-7xl mx-auto">
 <div class="max-w-7xl mx-auto  min-h-screen font-body">
-    <div class="  ">
+    <div id="group_images">
         <div   id="row" class="flex flex-row content-center lg:place-content-center  md:gap-12 gap-4 overflow-x-scroll sm:h-40  h-32  p-4  ">
             <img class="group_images   " id="img1" src="{{url_for('static',filename='objective1.png')}}" />
             <img class="group_images   " id="img2" src="{{url_for('static',filename='objective2.png')}}" />
@@ -102,11 +102,12 @@
             <img class="group_images   " id="img4" src="{{url_for('static',filename='objective4.png')}}" />
             <img class="group_images   " id="img5" src="{{url_for('static',filename='objective5.png')}}" />
         </div>
-            <div class="image-content md:m-5 m-3" id="content1">
+        <div class="selected-image"></div>
+            <div class="image-content  md:m-5 m-3 " id="content1">
                 <text class="md:text-xl  text-lg font-bold mt-10 "> Aim of the Project </text><br>
                 <ul class=" mt-4 "> 
                     <li class="list-inside "> 
-                        <span class="flex md:text-lg  text-md font-normal font-wider ">
+                        <span class="flex   text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             <text> 
                             To build bidirectional English-IL and IL-IL machine translation (IL-ILMT) systems for
@@ -115,7 +116,7 @@
                         </span>
                     </li> 
                     <li class="my-4"> 
-                        <span class="flex md:text-lg text-md font-normal font-wider ">
+                        <span class="flex text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             Domain adapt the systems for the following domains and their subdomains : Governance; Educational Content in the fields of Science and Technology (Biology, Chemistry, Physics, Environmental Science, Computer Science Engineering, Electrical Engineering,Mechanical Engineering), Law, Economics, Management; Health Care (Consent Forms and Information Sheets, Awareness and Pharma); Judiciary (Case Files); Agriculture and Food Security
                         </span>                        
@@ -125,7 +126,7 @@
             <div class="image-content md:m-5 m-3" id="content2">
                 <text class="md:text-xl  text-lg font-bold mt-10"> Corpora Development   </text> 
                 <ul class=" mt-4 "> 
-                    <li class="my-2 flex md:text-lg text-md font-normal font-wider"> 
+                    <li class="my-2 flex  text-md font-normal font-wider"> 
                          <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             <div> Parallel Corpora Development: We will develop 800k parallel corpora in 11 language pairs in the following two domains in the project 
                                 <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -139,7 +140,7 @@
                                 </ul>
                             </div>                       
                     </li>
-                    <li class="my-4 flex text-lg font-normal font-wider"> 
+                    <li class="my-4 flex text-md font-normal font-wider"> 
                         <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                            <div> The corpora will be developed using the following 3 methods.
                                <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -149,7 +150,7 @@
                                 </ul>
                             </div>
                         </li> 
-                    <li class="my-4 flex text-lg font-normal font-wider"> 
+                    <li class="my-4 flex text-md font-normal font-wider"> 
                         <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                        <div>Annotated Corpora Development
                            <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -158,7 +159,7 @@
                            </ul>
                        </div>
                     </li>
-                    <li class="my-4 flex text-lg font-normal font-wider"> 
+                    <li class="my-4 flex text-md font-normal font-wider"> 
                         <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                        <div>Domain Dictionary Development
                            <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -173,13 +174,13 @@
                 <text class=" md:text-xl text-lg font-bold mt-10 ">  Evaluation methods and Benchmarks</text><br>
                 <ul class=" mt-4 "> 
                     <li class="list-inside "> 
-                        <span class="flex md:text-lg text-md font-normal font-wider ">
+                        <span class="flex text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                                 To evaluate Machine Translation systems, the project, in addition to making use of existing metrics, will propose novel metrics, methods, and tools, wherever the current methodologies are found to be lacking.
                         </span>
                     </li> 
                     <li class="my-4"> 
-                        <div class="flex md:text-lg text-md font-normal font-wider">
+                        <div class="flex text-md font-normal font-wider">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}"  />
                             <div> Benchmark data Development<br> 
                             <ul class="list-outside  list-disc  ml-4 md:ml-10 " >  
@@ -198,7 +199,7 @@
                 <text class="md:text-xl  text-lg font-bold mt-10 "> Productization and deployment </text><br>
                 <ul class=" mt-4 ">
                     <li class="list-inside ">
-                        <span class="flex md:text-lg  text-md font-normal font-wider ">
+                        <span class="flex  text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}" />
                             <text>
                                 The productization will be carried out by an engineering team set up specially to translate the lab technologies
@@ -216,7 +217,7 @@
                 <text class="md:text-xl  text-lg font-bold mt-10 "> Workshops/Training </text><br>
                 <ul class=" mt-4 ">
                     <li class="list-inside ">
-                        <span class="flex md:text-lg  text-md font-normal font-wider ">
+                        <span class="flex   text-md font-normal font-wider ">
                             <img class=" m-1 h-4" src="{{url_for('static',filename='rightarrow.png')}}" />
                             <text>
                                 One of the objectives of the project is to take the systems to the field where these will actually be used users Along
@@ -339,11 +340,16 @@
                 }
             });
             });
-            var imagebutton = document.getElementById('imagebutton');
-            var imagecontent = document.getElementById('imagecontent');
-            imagebutton.addEventListener('click', function () {
-                imagebutton.classList.toggle('open');
-            });
+
+
+
+  
+         var imagebutton = document.getElementById('imagebutton');
+                 var imagecontent = document.getElementById('imagecontent');
+                 imagebutton.addEventListener('click', function() {
+                     imagebutton.classList.toggle('open');
+                 });
+
             var mobilemenu = false
             var hambutton = document.getElementById('hamburg');
             var hamcontent = document.getElementById('mobilecontent');

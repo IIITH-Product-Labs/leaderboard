@@ -68,7 +68,7 @@ margin-left: 30px;
 margin-top: 1px; 
 width: 128px;*/
 }
-.scrollmenu-a{
+/* .scrollmenu-a{
     background-color: #0F2749;
     overflow: auto;
     white-space: nowrap;
@@ -85,8 +85,8 @@ width: 128px;*/
   padding: 0px;
   text-decoration: none;
   margin-left: 8.3%;
-}
-.scrollmenu-a a:link{
+} */
+/* .scrollmenu-a a:link{
 	text-decoration: none;
 }
 .scrollmenu-a a:hover{
@@ -103,13 +103,13 @@ text-decoration: underline;
 text-decoration-color: #F37E27;
 text-decoration-thickness: 2px;
 text-underline-offset: 0.3em;
-/*border-radius: 2px;
+/* /*border-radius: 2px;
 border: 1px none; 
 height: 4px; 
 margin-left: 30px; 
 margin-top: 1px; 
 width: 128px;*/
-}
+/* } */ 
 .m1 {
     display:flex;
     width:100%;
