@@ -95,7 +95,7 @@
             <div class="max-w-7xl mx-auto">
 <div class="max-w-7xl mx-auto  min-h-screen font-body">
     <div id="group_images">
-        <div   id="row" class="flex flex-row content-center lg:place-content-center  md:gap-12 gap-4 overflow-x-scroll sm:h-40  h-32  p-4  ">
+        <div   id="row" class="flex flex-row  lg:justify-between    max-w-7xl  gap-4  overflow-x-scroll sm:h-40  h-32  p-4  ">
             <img class="group_images   " id="img1" src="{{url_for('static',filename='objective1.png')}}" />
             <img class="group_images   " id="img2" src="{{url_for('static',filename='objective2.png')}}" />
             <img class="group_images   " id="img3" src="{{url_for('static',filename='objective3.png')}}" />
@@ -310,35 +310,37 @@
                 });
             });
 
-            $(".group_images").click(function() {
-                var x = $(this).offset().left;
-                var y = $(this).offset().top;
-                $(".selected-image").css({
-                left: x - 10,
-                top: y - 10,
-                display: "block"
-                });
+            // $(".group_images").click(function() {
+            //     var x = $(this).offset().left;
+            //     var y = $(this).offset().top;
+            //     $(".selected-image").css({
+            //     left: x - 10,
+            //     top: y - 10,
+            //     display: "block"
+            //     });
 
-                var id = $(this).attr("id");
-                $("#" + id.replace("img", "content")).css({
-                display: "block"
-                });
-                $(".image-content").not("#" + id.replace("img", "content")).css({
-                display: "none"
-                });
-            });
+            //     var id = $(this).attr("id");
+            //     var defaultVal = id.defaultValue;
+            //     var currentVal = x.value;
+            //     $("#" + id.replace("img", "content")).css({
+            //     display: "block"
+            //     });
+            //     $(".image-content").not("#" + id.replace("img", "content")).css({
+            //     display: "none"
+            //     });
+            // });
 
-            $(document).mouseup(function(e) {
-                var container = $(".group_images");
-                if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".selected-image").css({
-                    display: "none"
-                });
-                $(".image-content").css({
-                    display: "none"
-                });
-                }
-            });
+            // $(document).mouseup(function(e) {
+            //     var container = $(".group_images");
+            //     if (!container.is(e.target) && container.has(e.target).length === 0) {
+            //     $(".selected-image").css({
+            //         display: "none"
+            //     });
+            //     $(".image-content").css({
+            //         display: "none"
+            //     });
+            //     }
+            // });
             });
 
 
