@@ -126,12 +126,27 @@
       <div class="flex:none"> 
         <img class="w-32 opacity-50" src="{{url_for('static',filename='g72.png')}}">
       </div>
-      <div class="flex-grow flex-col  mt-4 item-center  "> 
-        <div class=""> 
-          <img class="mx-auto md:w-2/5" src="{{url_for('static',filename='group.png')}}" />
-        <img class=" mx-auto mt-4 md:h-32  h-24  " src="{{url_for('static',filename='Group 600.png')}}" >
+      <!-- <div class="w-screen flex-col   item-center  ">  -->
+        <div class=" flex-grow sm:mt-4 mt-2  "> 
+          <img class="mx-auto md:w-2/5 w-3/5" src="{{url_for('static',filename='group.png')}}" />
+          <div class="  mt-4  mx-auto  gap-12  flex w-80 text-center" > 
+          
+            <div class="flex-col flex  " > 
+              <img class=" mx-auto  rounded-full sm:h-24 h-16  object-contain "  src="{{url_for('static',filename='image1.png')}}" />
+              <text class="font-bold">   Co-Investigator <br/> 
+              <span class="font-normal">Dr. Karunesh Arora     </span>
+              </text>
+            </div>
+            <div class="flex-col flex" > 
+
+              <img class=" mx-auto  rounded-full sm:h-24 h-16 object-contain "  src="{{url_for('static',filename='image2.png')}}" />
+              <text class="font-bold">   Co-Investigator <br/> 
+              <span class="font-normal">Dr. Karunesh Arora  </span> 
+              </text>
+            </div>
+          </div>
         </div>
-      </div>
+      <!-- </div> -->
       <div class="flex:none my-auto "> 
         <img class="w-32 opacity-50" src="{{url_for('static',filename='grp1.png')}}">
       </div>
@@ -142,20 +157,20 @@
     </div>
     
 
-    <div class=" max-w-7xl mx-auto grid  lg:grid-cols-3   md:grid-cols-2 sm:grid-col  mt-6 mb-12 lg:gap-12 md:gap-8  gap-2"  >
+    <div class=" max-w-7xl mx-auto grid  lg:grid-cols-3   md:grid-cols-2 sm:grid-col  mt-6 mb-12 lg:gap-8 md:gap-8  gap-2"  >
         
             <div class=" flex-col items-center text-left mx-10     " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-bold font-normal md:text-lg text-md ">English</p>
+                <p class="font-bold text-lg  ">English</p>
               </div>
-                <p class="text-md font-lighter text-center my-2">IIIT Hyderabad</p>
-              <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-md my-auto ">Prof Aditi Mukherjee <b>(PI)</b></p>
+                <p class="text-sm font-lighter text-center my-2">IIIT Hyderabad</p>
+              <div class=" flex item-center ">  
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='Group 45.png')}}">
+                <p class="text-sm my-auto ">Prof Aditi Mukherjee <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-md  my-auto ">Prof Dipti Misra Sharma <b>(Co-PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 " src="{{url_for('static',filename='Group 45.png')}}">
+                <p class="text-sm  my-auto ">Prof Dipti Misra Sharma <b>(Co-PI)</b></p>
               </div>
             </div>
 
@@ -163,158 +178,158 @@
 
             <div class=" flex-col items-center text-left mx-10  " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Hindi</p>
+                <p class="font-bold text-lg ">Hindi</p>
               </div>
-                <p class="text-md font-light text-center my-2">IIIT Hyderabad</p>
+                <p class="text-sm font-light text-center my-2">IIIT Hyderabad</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-md my-auto ">Prof Dipti Misra Sharma <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='Group 45.png')}}">
+                <p class="text-sm my-auto ">Prof Dipti Misra Sharma <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-md my-auto ">Prof Radhika Mamidi <b>(Co-PI)</b></p>
+                <p class="text-sm my-auto ">Prof Radhika Mamidi <b>(Co-PI)</b></p>
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left mx-10   " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Punjabi</p>
+                <p class="font-bold text-lg ">Punjabi</p>
               </div>
-                <p class="text-md font-light text-center my-2">CDAC Noida</p>
+                <p class="text-sm font-light text-center my-2">CDAC Noida</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-md my-auto ">Prof Karunesh Arora <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='CDAC2.png')}}">
+                <p class="text-sm my-auto ">Prof Karunesh Arora <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-md my-auto ">Prof Sunita Arora <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Sunita Arora <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
             <div class=" flex-col items-center text-left mx-10  " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">urdu</p>
+                <p class="font-bold text-lg ">Urdu</p>
               </div>
-                <p class="text-md font-light text-center my-2">IIIT Hyderabad, Punjabi University</p>
+                <p class="text-sm font-light text-center my-2 my-1">IIIT Hyderabad, Punjabi University</p>
               <div class=" flex item-center  ">  
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-md my-auto ">Prof Dipti Misra Sharma <b>(PI)</b></p>
+                <p class="text-sm my-auto ">Prof Dipti Misra Sharma <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='punjabi_university.png')}}">
-                <p class="text-md my-auto ">Prof G.S. Lehal <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof G.S. Lehal <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left   mx-10 " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl">
-                <p class="text-semibold text-lg ">Telugu</p>
+                <p class="font-bold text-lg ">Telugu</p>
               </div>
-                <p class="text-md font-light text-center my-2">IIIT Hyderabad, University of Hyderabad</p>
+                <p class="text-sm font-light text-center my-2">IIIT Hyderabad, University of Hyderabad</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Group 45.png')}}">
-                <p class="text-md my-auto ">Prof Radhika Mamidi <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='Group 45.png')}}">
+                <p class="text-sm my-auto ">Prof Radhika Mamidi <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='uoh.png')}}">
-                <p class="text-md my-auto ">Prof Rajya Rama <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Rajya Rama <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left mx-10  " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Kannada</p>
+                <p class="font-bold text-lg ">Kannada</p>
               </div>
-                <p class="text-md font-light text-center my-2">Manipal Institute of Techonology, CDAC Bangalore</p>
+                <p class="text-sm font-light text-center my-2">Manipal Institute of Techonology, CDAC Bangalore</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='Manipal.png')}}">
-                <p class="text-md my-auto ">Prof Narendra VG <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='Manipal.png')}}">
+                <p class="text-sm my-auto ">Prof Narendra VG <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-md my-auto ">Prof Annarao Kulkarni <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Annarao Kulkarni <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
             <div class=" flex-col items-center text-left  mx-10 " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Sindhi</p>
+                <p class="font-bold text-lg ">Sindhi</p>
               </div>
-                <p class="text-md font-light text-center my-2">Punjabi University</p>
+                <p class="text-sm font-light text-center my-2">Punjabi University</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='punjabi_university.png')}}">
-                <p class="text-md my-auto ">Prof G.S. Lehal <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='punjabi_university.png')}}">
+                <p class="text-sm my-auto ">Prof G.S. Lehal <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='punjabi_university.png')}}">
-                <p class="text-md my-auto ">Prof Tejinder Singh <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Tejinder Singh <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left mx-10  " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Odia</p>
+                <p class="font-bold text-lg ">Odia</p>
               </div>
-                <p class="text-md font-light text-center my-2">IIIT Bhubaneswar, CDAC Noida</p>
+                <p class="text-sm font-light text-center my-2">IIIT Bhubaneswar, CDAC Noida</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='iiit b.png')}}">
-                <p class="text-md my-auto ">Prof Rakesh Chandra Balbantaray <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='iiit b.png')}}">
+                <p class="text-sm my-auto ">Prof Rakesh Chandra Balbantaray <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-md my-auto ">Prof Karunesh Arora <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Karunesh Arora <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left  mx-10 " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Dogri</p>
+                <p class="font-bold text-lg ">Dogri</p>
               </div>
-                <p class="text-md font-light text-center my-2">CDAC Noida, Govt. College for Women, Jammu</p>
+                <p class="text-sm font-light text-center my-2">CDAC Noida, Govt. College for Women, Jammu</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='GCW.png')}}">
-                <p class="text-md my-auto ">Prof Karunesh Arora <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='GCW.png')}}">
+                <p class="text-sm my-auto ">Prof Karunesh Arora <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='CDAC2.png')}}">
-                <p class="text-md my-auto ">Prof Preeti Dubey <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Preeti Dubey <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left  mx-10 " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Kashmiri</p>
+                <p class="font-bold text-lg ">Kashmiri</p>
               </div>
-                <p class="text-md font-light text-center my-2">University of Kashmir</p>
+                <p class="text-sm font-light text-center my-2">University of Kashmir</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='uok.png')}}">
-                <p class="text-md my-auto ">Prof Adil Amin Kak <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1"  src="{{url_for('static',filename='uok.png')}}">
+                <p class="text-sm my-auto ">Prof Adil Amin Kak <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='uok.png')}}">
-                <p class="text-md my-auto ">Prof Preeti Dubey <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Preeti Dubey <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
 
             <div class=" flex-col items-center text-left  mx-10 " >
               <div class=" p-2 bg-Yellow  text-center rounded-xl ">
-                <p class="text-semibold text-lg ">Gujarati</p>
+                <p class="font-bold text-lg ">Gujarati</p>
               </div>
-                <p class="text-md font-light text-center my-2">IDAIICT, IIT Patna</p>
+                <p class="text-sm font-light text-center my-2">DAIICT, IIT Patna</p>
               <div class=" flex item-center  ">  
-                <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='DAIICT.png')}}">
-                <p class="text-md my-auto ">Prof Prasenjit Majumder <b>(PI)</b></p>
+                <img class="w-12 h-12 object-contain mx-4 my-1" src="{{url_for('static',filename='DAIICT.png')}}">
+                <p class="text-sm my-auto ">Prof Prasenjit Majumder <b>(PI)</b></p>
               </div>
               <div class="flex s"> 
                 <img class="w-12 h-12 object-contain mx-4" src="{{url_for('static',filename='patna.png')}}">
-                <p class="text-md my-auto ">Prof Asif Ekbal <b>(Co-PI)</b></p>                         
+                <p class="text-sm my-auto ">Prof Asif Ekbal <b>(Co-PI)</b></p>                         
               </div>
             </div>
 
