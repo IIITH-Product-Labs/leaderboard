@@ -168,6 +168,11 @@
       </div>
 
       <script>
+        var dropdownButton1 = document.getElementById('dropdownButton1');
+
+            dropdownButton1.addEventListener('click', function() {
+                dropdownButton1.classList.toggle('open');
+            });
             var imagebutton = document.getElementById('imagebutton');
             var imagecontent = document.getElementById('imagecontent');
             imagebutton.addEventListener('click', function() {

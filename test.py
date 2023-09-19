@@ -15,8 +15,18 @@ from sacrebleu.metrics import BLEU, CHRF, TER
 from sacrebleu import raw_corpus_bleu
 import subprocess
 from pymongo import MongoClient
+import boto3
+
 app=Flask(__name__)
 app.secret_key = "secret_key"
+# s3 = boto3.client('s3')
+
+
+
+AWS_ACCESS_KEY_ID= "AKIA3BOLL3RQYEWKMV4B"
+AWS_ACCESS_KEY_SECRET= "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"
+AWS_S3_REGION="ap-south-1"
+AWS_S3_BUCKET="tto-asset"
 
 
 #myclient=pymongo.MongoClient("mongodb://localhost:27017/")
@@ -28,6 +38,8 @@ testcollection = mydb["UploadedTests"]
 admincollection=mydb["admindetails"]
 usercollection=mydb["userdetails"]
 organisationcollection=mydb["approved"]
+toolcollection=mydb["tools"]
+
 counter = 1
 count=1
 ucount=1
@@ -64,6 +76,17 @@ def adminconsortium():
 @app.route('/admindocuments')
 def admindocuments():
     return render_template('documents_a.html')
+
+@app.route('/tools')
+def tools():
+    try:
+        items = toolcollection.find({})
+        print(items)
+        # data=organisationcollection.find({"status":"Accepted"})
+        # data1=organisationcollection.find({"status":"Accepted"})
+        return render_template('tools.html',items=items)
+    except:
+        return ("Unable to load page")
 
 @app.route('/leaderboard')
 def leaderboard():
@@ -123,6 +146,19 @@ def upload():
         return render_template('upload.html',items=items,data=data,data1=data1)
     except:
         return ("Unable to load page")
+
+@app.route('/addtools')
+def addtools():
+    try:
+        items = toolcollection.find({})
+        print(items)
+        # data=organisationcollection.find({"status":"Accepted"})
+        # data1=organisationcollection.find({"status":"Accepted"})
+        return render_template('addtools.html',items=items)
+    except:
+        return ("Unable to load page")
+
+
 
 @app.route('/edit',methods=['GET','POST'])
 def edit():
@@ -767,6 +803,55 @@ def form2():
         return render_template('leaderboard a.html',items=items)
     except:
         return ("error")
+
+@app.route('/toolsform', methods=['POST','GET'])# upload test data storing
+def Toolsform():
+    global ucount
+
+    product_name = request.form["productname"]
+    product_url = request.form["producturl"]
+    github_url = request.form["githuburl"]
+    description = request.form["description"]
+    tfile = request.files["file"]
+    print(tfile)
+    tname=tfile.filename
+    print(tname)
+
+    target_file_name="HimangyTools/"+tname
+
+    if tfile.filename == '':
+        return "No selected file"
+    print(target_file_name)
+
+    tfile_data = tfile.read()
+    tf = io.BytesIO(tfile_data)
+    tfile_size=len(tfile_data)
+    print(tfile_size)
+
+    try:
+        s3 = boto3.client('s3',aws_access_key_id=AWS_ACCESS_KEY_ID,aws_secret_access_key=AWS_ACCESS_KEY_SECRET)
+        object_name = target_file_name
+        s3.upload_fileobj(tfile, AWS_S3_BUCKET, target_file_name)
+        upload_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{target_file_name}"
+        print(upload_url)
+
+        document = {"id":str(ucount),"product_name": product_name,"product_url":product_url, "github_url": github_url ,"description":description ,"fileurl":upload_url,"status":"published"}
+        toolcollection.insert_one(document)
+        ucount=ucount+1
+        print(document)
+        
+        #items = organisationcollection.find({"status":"Accepted"})
+        #return render_template("upload.html",items=items)
+        items=toolcollection.find({"status":"published"})
+        # items1=items.sort("version",-1)
+        print(items)
+        print("thanks for submmiting")
+        
+        return render_template('addtools.html',items=items)
+
+    except:
+        return ("error")
+
 
 @app.route('/update', methods=['POST','GET'])#edited data updating in backend
 def update():

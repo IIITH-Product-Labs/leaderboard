@@ -226,7 +226,7 @@ width: 128px;*/
     color:white;
     border:0;
     display: inline-block; 
-	font-family: 'Montserrat';
+	  font-family: 'Montserrat';
     font-style: normal;
     font-weight: 550;
     font-size: 16px;
@@ -263,9 +263,6 @@ width: 128px;*/
     float: right;
     position: relative;
 }
-
-
-
 
 .fieldset {
     float: right;

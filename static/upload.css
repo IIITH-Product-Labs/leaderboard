@@ -250,7 +250,19 @@
   #dropdownMenu1 {
       display: none;
   }
-  
+
+
+  #dropdownButton2:hover + #dropdownMenu2 {
+    display: block;
+}
+
+#dropdownButton2.open + #dropdownMenu2 {
+    display: block;
+}
+
+#dropdownMenu2 {
+    display: none;
+}
   
 .dots{
     width:100%;
