@@ -52,7 +52,7 @@
             </div>
         </div> -->
         <div class="menu">
-            <button class="dropdown-btn2 " id="dropdownButton2">Himangy Tools</button>
+            <button class="dropdown-btn2" id="dropdownButton2">Himangy Tools</button>
             <div class="menu-c" id="dropdownMenu2">
                 <a href="{{ url_for('tools') }}" class="dropdown-content"><span>Show Tools</span></a>
                 <a href="{{ url_for('addtools') }}" class="dropdown-content"><span>Add Tools</span></a>
@@ -100,12 +100,7 @@
                 <div class="filerow">
                     <div class='file file--upload button'>
                         <label for='input-file'>Upload Thumbnail</label>
-                        <input 
-                        id='input-file'
-                        type="file" 
-                        name="file"
-                        onchange="message()"
-                    >
+                        <input id='input-file' type="file" name="image" accept="image/*" onchange="message()" required>
                     </div>
                 </div>
                 <div id="success-message">

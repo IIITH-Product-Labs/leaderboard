@@ -158,10 +158,10 @@
       font-weight: 550;
       font-size: 16px;
       padding: 0px;
-      text-decoration: underline;
-      text-decoration-color: #F37E27;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 0.3em;
+      /* text-decoration: underline; */
+      /* text-decoration-color: #F37E27; */
+      /* text-decoration-thickness: 2px; */
+      /* text-underline-offset: 0.3em; */
      
     }
     
@@ -232,6 +232,10 @@
       font-weight: 550;
       font-size: 16px;
       padding: 0px;
+      text-decoration: underline;
+      text-decoration-color: #F37E27;
+      text-decoration-thickness: 2px;
+        text-underline-offset: 0.3em;
     }
     .dropdown-btn2:hover{
       text-decoration: underline;

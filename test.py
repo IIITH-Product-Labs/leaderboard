@@ -16,6 +16,8 @@ from sacrebleu import raw_corpus_bleu
 import subprocess
 from pymongo import MongoClient
 import boto3
+import botocore
+
 
 app=Flask(__name__)
 app.secret_key = "secret_key"
@@ -812,12 +814,12 @@ def Toolsform():
     product_url = request.form["producturl"]
     github_url = request.form["githuburl"]
     description = request.form["description"]
-    tfile = request.files["file"]
+    tfile = request.files["image"]
     print(tfile)
     tname=tfile.filename
     print(tname)
 
-    target_file_name="HimangyTools/"+tname
+    target_file_name=tname
 
     if tfile.filename == '':
         return "No selected file"
@@ -831,11 +833,17 @@ def Toolsform():
     try:
         s3 = boto3.client('s3',aws_access_key_id=AWS_ACCESS_KEY_ID,aws_secret_access_key=AWS_ACCESS_KEY_SECRET)
         object_name = target_file_name
-        s3.upload_fileobj(tfile, AWS_S3_BUCKET, target_file_name)
-        upload_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{target_file_name}"
-        print(upload_url)
+        s3.upload_fileobj(tf, AWS_S3_BUCKET, object_name)
+        # s3.upload_fileobj(fo, bucket, key)
+        s3_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{target_file_name}"
+        print(s3_url)
 
-        document = {"id":str(ucount),"product_name": product_name,"product_url":product_url, "github_url": github_url ,"description":description ,"fileurl":upload_url,"status":"published"}
+        # return f"Image uploaded successfully. S3 URL: {s3_url}"
+        # except botocore.exceptions.NoCredentialsError:
+        # return "AWS credentials not found. Please configure your AWS credentials."
+
+
+        document = {"id":str(ucount),"product_name": product_name,"product_url":product_url, "github_url": github_url ,"description":description ,"fileurl":s3_url,"status":"published"}
         toolcollection.insert_one(document)
         ucount=ucount+1
         print(document)
@@ -847,7 +855,7 @@ def Toolsform():
         print(items)
         print("thanks for submmiting")
         
-        return render_template('addtools.html',items=items)
+        return  redirect(url_for('tools'))
 
     except:
         return ("error")
