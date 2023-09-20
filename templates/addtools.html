@@ -30,10 +30,10 @@
         </div>
     </div>
     <div class="scrollmenu-l">
-        <a href="{{ url_for('adminabout') }}" class="nav-content">Home</a>
-        <a href="{{ url_for('adminobjective') }}" class="nav-content">Objectives</a>
-        <a href="{{ url_for('adminconsortium') }}" class="nav-content">Consortium Members</a>
-        <a href="{{ url_for('admindocuments') }}" class="nav-content">Documents</a>
+        <a href="{{ url_for('about') }}" class="nav-content">Home</a>
+        <a href="{{ url_for('objective') }}" class="nav-content">Objectives</a>
+        <a href="{{ url_for('consortium') }}" class="nav-content">Consortium Members</a>
+        <a href="{{ url_for('documents') }}" class="nav-content">Documents</a>
         <a target="_self" href="https://himgangycanvas.iiithcanvas.com/" class="nav-content">Applications</a>
         <div class="menu">
             <button class="dropdown-btn1" id="dropdownButton">Leader Board</button>
@@ -64,7 +64,7 @@
         <div class="d">
             <form action="/toolsform" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                    <a href="{{ url_for('adminabout') }}" class="term1">About us /</a>
+                    <a href="{{ url_for('about') }}" class="term1">About us /</a>
                     <a href="{{ url_for('tools') }}" class="term1">&nbsp;Himangy tools/</a>
                     <a href="{{ url_for('addtools') }}" class="term2">&nbsp;Add tool</a>
                 </div>
