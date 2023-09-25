@@ -79,16 +79,31 @@ def adminconsortium():
 def admindocuments():
     return render_template('documents_a.html')
 
+# @app.route('/tools')
+# def tools():
+#     try:
+#         items = toolcollection.find({})
+#         print(items)
+#         return render_template('tools.html',items=items)
+#     except:
+#         return ("Unable to load page")
+    
 @app.route('/tools')
 def tools():
+    language = request.args.get('languageselect')
+
+    if language is None:
+        language = 'english' # Set default language
+        print(language)
     try:
-        items = toolcollection.find({})
+        
+        items = toolcollection.find({"language":language,"status":"published"}) 
         print(items)
-        # data=organisationcollection.find({"status":"Accepted"})
-        # data1=organisationcollection.find({"status":"Accepted"})
-        return render_template('tools.html',items=items)
+        return render_template('tools.html', items=items  )
     except:
         return ("Unable to load page")
+
+
 
 @app.route('/leaderboard')
 def leaderboard():
@@ -811,6 +826,7 @@ def Toolsform():
     global ucount
 
     product_name = request.form["productname"]
+    language = request.form["language"]
     product_url = request.form["producturl"]
     github_url = request.form["githuburl"]
     description = request.form["description"]
@@ -843,7 +859,7 @@ def Toolsform():
         # return "AWS credentials not found. Please configure your AWS credentials."
 
 
-        document = {"id":str(ucount),"product_name": product_name,"product_url":product_url, "github_url": github_url ,"description":description ,"fileurl":s3_url,"status":"published"}
+        document = {"id":str(ucount),"product_name": product_name,"product_url":product_url ,"language":language, "github_url": github_url ,"description":description ,"fileurl":s3_url,"status":"published"}
         toolcollection.insert_one(document)
         ucount=ucount+1
         print(document)
