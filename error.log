@@ -1,0 +1,90 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [15/Dec/2023 10:15:55] "[33mGET /adminabout HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Dec/2023 10:15:59] "[33mGET /adminabout HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Dec/2023 10:16:02] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:04] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:04] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:04] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:04] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:04] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:04] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:13] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:14] "GET /api/tasktype HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:21] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:21] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:43] "OPTIONS /api/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:43] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:44] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:44] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/tasktypes/undefined HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/tasktypes/655567dbbf0cc5e278bdb402 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:49] "GET /api/tasktypes/655567dbbf0cc5e278bdb402 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:30:50] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+ERROR:test:Exception on /api/newform [POST]
+Traceback (most recent call last):
+  File "/home/iiith/Sample/backend/myenv/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/iiith/Sample/backend/myenv/lib/python3.10/site-packages/flask/app.py", line 1487, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/iiith/Sample/backend/myenv/lib/python3.10/site-packages/flask/app.py", line 1506, in finalize_request
+    response = self.make_response(rv)
+  File "/home/iiith/Sample/backend/myenv/lib/python3.10/site-packages/flask/app.py", line 1801, in make_response
+    raise TypeError(
+TypeError: The view function for 'newform_api' did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:31:24] "[35m[1mPOST /api/newform HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:31:33] "[35m[1mGET /api/newform HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:31:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:31:52] "[35m[1mGET /api/newform HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:28] "POST /api/publish HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:34] "POST /api/newform HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:38] "GET /api/tasktype?campaign=655567dbbf0cc5e278bdb402 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:38] "GET /api/leaderboard?campaign=655567dbbf0cc5e278bdb402&tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:38] "GET /api/leaderboard?campaign=655567dbbf0cc5e278bdb402&tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:33:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:51] "GET /api/tasktypes/undefined HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:51] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:52] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:52] "GET /api/tasktypes/655567dbbf0cc5e278bdb402 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:52] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:52] "GET /api/submit HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:52] "GET /api/tasktypes/655567dbbf0cc5e278bdb402 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:35:52] "GET /api/userleaderboard?tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:28] "POST /api/publish HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:34] "POST /api/newform HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:47] "GET /api/tasktype?campaign=655567dbbf0cc5e278bdb402 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:47] "GET /api/leaderboard?campaign=655567dbbf0cc5e278bdb402&tasktype=Translation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2023 23:36:47] "GET /api/leaderboard?campaign=655567dbbf0cc5e278bdb402&tasktype=Translation HTTP/1.1" 200 -

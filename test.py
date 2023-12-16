@@ -1317,7 +1317,7 @@ def newform_api():
                     "chrf_sign": str(s1),
                     "ter_sign": str(s2),
                     "status": "published",
-                    "campaignId": campaign  # Add campaignId to the document
+                    "campaignId": campaign_id  # Add campaignId to the document
                 }
 
                 # Your existing MongoDB insertion code...
