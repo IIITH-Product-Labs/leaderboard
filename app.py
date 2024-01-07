@@ -59,7 +59,7 @@ AWS_ACCESS_KEY_SECRET = "hC2uCvxYNWdR/BI0qEqYtPdS6B2YIB2ro1VGlWw2"
 AWS_S3_REGION = "ap-south-1"
 AWS_S3_BUCKET = "tto-asset"
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017")
+myclient = pymongo.MongoClient("mongodb+srv://Developer:Bahubhashak@bahubhashaak-project.ascwu.mongodb.net")
 mydb = myclient["leaderboard"]  # database
 mycol = mydb['details'] 
 collection = mydb["submitresult"]
