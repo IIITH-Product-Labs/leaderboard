@@ -1334,11 +1334,11 @@ def calculate_precision_recall_f1(bert_score):
 
         # Calculate averages
         avg_precision = sum(precision_scores) / len(precision_scores)
-        avg_precision = round(avg_precision, 2)*100
+        avg_precision = round(avg_precision* 100, 2)
         avg_recall = sum(recall_scores) / len(recall_scores)
-        avg_recall = round(avg_recall, 2)*100
+        avg_recall = round(avg_recall* 100, 2)
         avg_f1 = sum(f1_scores) / len(f1_scores)
-        avg_f1 = round(avg_f1, 2)*100
+        avg_f1 = round(avg_f1 * 100, 2 )
 
         return avg_precision, avg_recall, avg_f1
 
@@ -1363,10 +1363,11 @@ def comet(hypotheses, references, sources):
         
         # Calculate the average of the scores
         avg_comet_score = sum(scores) / len(scores)
-        avg_comet_score = round(avg_comet_score, 2)*100  # Round to two decimal places
+        avg_comet_score = round(avg_comet_score * 100, 2) 
         return f'{avg_comet_score:.2f}'
 
     return "No scores available"
+
 
 def bertscore(hypotheses, references):
     metric = evaluate.load('bertscore')
@@ -1613,7 +1614,7 @@ def newform_api():
                     "recall": str(data6),
                     "f1": str(data7),
                     "comet": str(data8),
-                    "status": "published",
+                    "status": "in review",
                     "campaignId": campaign_id,  # Add campaignId to the document
                     "userId":user_id
                 }
@@ -1644,15 +1645,18 @@ def newform_api():
         traceback.print_exc()
         return jsonify({"error": f"Unexpected Error: {e}", "type": "UnexpectedError"}), 500
 
-# Add a new route to get scores
-@app.route('/api/getscores', methods=['GET'])
-def get_scores():
-    # Read scores from the file
-    with open('./scores.txt', 'r') as scores_file:
-        scores = scores_file.read()
+@app.route('/api/get_scores', methods=['GET'])
+def api_get_scores():
+    try:
+        # Read scores from the file
+        with open('./scores.txt', 'r') as scores_file:
+            scores = scores_file.read()
 
-    return jsonify({"scores": scores})
+        return jsonify({"scores": scores, "message": "Scores fetched successfully"})
 
+    except Exception as e:
+        return jsonify({"error": f"Failed to fetch scores: {str(e)}"}), 500
+    
 @app.route('/api/publish', methods=['POST', 'GET'])
 def api_publish():
     global count
@@ -1675,19 +1679,35 @@ def api_publish():
 
             # Your existing S3 and MongoDB update code...
 
-            # Query the MongoDB collection for the updated items
-            items = collection.find({"tasktype": "Translation", "status": "published"})
-            items1 = items.sort("version", -1)
+             # Query the MongoDB collection for the updated items with status "in review"
+            items_to_publish = collection.find({
+                "status": "in review",
+                "organisation": organisation,  # Adjust this based on your data model
+                "tasktype": tasktype,  # Adjust this based on your data model
+                "sourcelanguage": slanguage,
+                "targetlanguage": tlanguage,
+                "testsetname": testsetname,
+                "module": module,
+                "version": version,
+                # Add more criteria if needed to uniquely identify the items to publish
+            })
 
-            return jsonify({"status": "success", "message": "Item published successfully"})
+            # Update the status to "published" for the selected items
+            for item in items_to_publish:
+                collection.update_one(
+                    {"_id": item["_id"]},
+                    {"$set": {"status": "published"}}
+                )
+
+            return jsonify({"status": "success", "message": "Item(s) published successfully"})
 
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
 
     elif request.method == 'GET':
         try:
-            # Query the MongoDB collection for the items
-            items = collection.find({"tasktype": "Translation", "status": "published"})
+            # Query the MongoDB collection for the items with status "in review"
+            items = collection.find({"status": "in review"})
             items1 = items.sort("version", -1)
 
             # Convert MongoDB cursor to a list of dictionaries
@@ -1698,6 +1718,67 @@ def api_publish():
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
 
+@app.route('/api/reject', methods=['POST', 'GET'])
+def api_reject():
+    global count
+
+    if request.method == 'POST':
+        try:
+            with open('./login_response.json', 'r') as file:
+                login_response = json.load(file)
+                organisation = login_response["organisation"]
+            tasktype = request.form["tasktype"]
+            slanguage = request.form["slanguage"]
+            tlanguage = request.form["tlanguage"]
+            testsetname = request.form["testsetname"]
+            module = request.form["module"]
+            version = request.form["version"]
+            file = request.files["file"]
+
+            file_data = file.read()
+            f = io.BytesIO(file_data)
+
+            # Your existing S3 and MongoDB update code...
+
+             # Query the MongoDB collection for the updated items with status "in review"
+            items_to_publish = collection.find({
+                "status": "in review",
+                "organisation": organisation,  # Adjust this based on your data model
+                "tasktype": tasktype,  # Adjust this based on your data model
+                "sourcelanguage": slanguage,
+                "targetlanguage": tlanguage,
+                "testsetname": testsetname,
+                "module": module,
+                "version": version,
+                # Add more criteria if needed to uniquely identify the items to publish
+            })
+
+            # Update the status to "published" for the selected items
+            for item in items_to_publish:
+                collection.update_one(
+                    {"_id": item["_id"]},
+                    {"$set": {"status": "rejected"}}
+                )
+
+            return jsonify({"status": "success", "message": "Item not published"})
+
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
+
+    elif request.method == 'GET':
+        try:
+            # Query the MongoDB collection for the items with status "in review"
+            items = collection.find({"status": "in review"})
+            items1 = items.sort("version", -1)
+
+            # Convert MongoDB cursor to a list of dictionaries
+            items_list = list(items1)
+
+            return jsonify({"status": "success", "items": items_list})
+
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
+        
 @app.route('/create', methods=['POST','GET'])# user registeration data storing
 def create():
     global counter
@@ -2128,6 +2209,7 @@ def update_campaign():
 
 if __name__=='__main__':
     app.run()
+
 
 
 
