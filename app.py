@@ -250,14 +250,9 @@ def admindocuments_api():
    
 @app.route('/tools', methods=['GET'])
 def tools_api():
-    language = request.args.get('languageselect')
-
-    if language is None:
-        language = 'english'  # Set default language
-
     try:
         # Assuming you have a MongoDB collection named 'toolcollection'
-        items = toolcollection.find({"language": language, "status": "published"})
+        items = toolcollection.find({"status": "published"})
 
         # Convert MongoDB cursor to a list of dictionaries
         tool_list = []
@@ -267,7 +262,6 @@ def tools_api():
 
         # Return the data as JSON
         response_data = {
-            "language": language,
             "tools": tool_list
         }
 
@@ -275,6 +269,7 @@ def tools_api():
 
     except Exception as e:
         return jsonify({"error": str(e)})
+
 
 @app.route('/api/tasktype', methods=['GET'])
 def tasktype_api():
