@@ -523,7 +523,7 @@ def myleaderboard_api():
             if selected_tasktype:
                 filter["tasktype"] = selected_tasktype
 
-            items = collection.find(filter).sort({sort_param: -1})
+            items = collection.find(filter).sort(sort_param, -1)
 
             # Convert MongoDB cursor to a list of dictionaries
             leaderboard_list = []
