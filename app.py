@@ -417,7 +417,7 @@ def leaderboard_api():
         if selected_tasktype:
             filter["tasktype"] = selected_tasktype
 
-        items = collection.find(filter).sort({sort_param: -1})
+        items = collection.find(filter).sort(sort_param, -1)
 
 
         # Convert MongoDB cursor to a list of dictionaries
@@ -2202,9 +2202,8 @@ def update_campaign():
 
     return jsonify({"message": "Data updated successfully"})
 
-if __name__=='__main__':
-    app.run()
-
+if __name__ == "__main__":
+    app.run(host='ec2-13-233-215-141.ap-south-1.compute.amazonaws.com', port=5000)
 
 
 
