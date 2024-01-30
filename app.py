@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session, send_file
-from flask_pymongo import PyMongo
+from deep_translator import GoogleTranslator
 from werkzeug.utils import secure_filename
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
@@ -35,29 +35,18 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from random import randint
 from flask_mail import Mail, Message
-
-# Initialize the logging configuration
-logging.basicConfig(filename='error.log', level=logging.ERROR)
+from config import Config
+import datetime
+import logging
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+app.config.from_object(Config)
 app.config['SESSION_TYPE'] = 'filesystem'  # Use the filesystem for session storage
 app.config['SESSION_PERMANENT'] = True
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 mail= Mail(app)
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'shashankn7261@gmail.com'
-app.config['MAIL_PASSWORD'] = 'zcbt nupd ajkj cyoe'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
-
-AWS_ACCESS_KEY_ID = "AKIA3BOLL3RQYEWKMV4B"
-AWS_ACCESS_KEY_SECRET = "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"
-AWS_S3_REGION = "ap-south-1"
-AWS_S3_BUCKET = "tto-asset"
 
 myclient = pymongo.MongoClient("mongodb+srv://Developer:Bahubhashak@bahubhashaak-project.ascwu.mongodb.net")
 mydb = myclient["leaderboard"]  # database
@@ -69,6 +58,8 @@ usercollection = mydb["userdetails"]
 organisationcollection = mydb["approved"]
 toolcollection = mydb["tools"]
 campaigncollection = mydb["Campaign"]
+session_collection = mydb["sessions"]
+language_collection = mydb["languages"]
 
 counter = 1
 count = 1
@@ -156,7 +147,7 @@ def api_login():
     print("Session after login:", dict(session))
 
     # Update the organization and campaign dynamically in the frontend
-    session['login_response'] = {
+    login_response = {
         'status': 'success',
         'message': 'Login successful',
         'role': user_role,
@@ -167,8 +158,38 @@ def api_login():
         'campaign': campaign_name
     }
 
-    return jsonify(session['login_response'])
-   
+    # Write the login response to a JSON file
+    with open('./login_response.json', 'w') as json_file:
+        json.dump(login_response, json_file)
+
+    return jsonify(login_response)
+
+@app.route('/api/signout', methods=['GET'])
+def api_signout():
+    session.clear()
+    response = {'status': 'success', 'message': 'User signed out successfully'}
+
+    if 'logged_in' in session:
+        username = session.get('username')
+
+        if username:
+            # Check if the user is an admin by querying the database
+            admin = admincollection.find_one({"username": username})
+            if admin:
+                print("Admin:", username)
+                # Perform any additional admin-specific actions if needed
+            else:
+                print("Non-admin:", username)
+
+        # Clear session data
+        session.pop('logged_in', None)
+        session.pop('username', None)
+    else:
+        response['status'] = 'error'
+        response['message'] = 'User is not logged in'
+
+    return jsonify(response)
+
 @app.route('/about')
 def about_data():
     data = {
@@ -270,7 +291,6 @@ def tools_api():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-
 @app.route('/api/tasktype', methods=['GET'])
 def tasktype_api():
     try:
@@ -368,11 +388,8 @@ def get_leaderboard_data_user(campaign_id, task_type):
 def campaign_api():
 
     # Fetch user details from login_response.json
-    with open('login_response.json', 'r') as login_file:
+    with open('./login_response.json', 'r') as login_file:
         user_details = json.load(login_file)
-
-    # Log the user details to the console
-    print("User Details:", user_details)
 
     # Get the user's registered campaign
     user_campaign = user_details.get('campaign')
@@ -405,20 +422,28 @@ def campaign_api():
 @app.route('/api/leaderboard', methods=['GET'])
 def leaderboard_api():
     try:
-        # Get the selected campaign and tasktype from the query parameters
+        # Get the selected campaign, tasktype, benchmarks, source language, and target language from the query parameters
         selected_campaign = request.args.get('campaign')
         selected_tasktype = request.args.get('tasktype')
+        selected_benchmark = request.args.get('benchmark')
+        selected_source_language = request.args.get('sourcelanguage')
+        selected_target_language = request.args.get('targetlanguage')
         sort_param = request.args.get('sort', 'bleu')  # Default sorting by "bleu" if not provided
 
-        # Define a filter based on the selected campaign and tasktype
+        # Define a filter based on the selected campaign, tasktype, source language, and target language
         filter = {"status": "published"}
         if selected_campaign:
             filter["campaignId"] = selected_campaign
         if selected_tasktype:
             filter["tasktype"] = selected_tasktype
+        if selected_benchmark:
+            filter["benchmark"] = selected_benchmark
+        if selected_source_language:
+            filter["sourcelanguage"] = selected_source_language
+        if selected_target_language:
+            filter["targetlanguage"] = selected_target_language
 
         items = collection.find(filter).sort(sort_param, -1)
-
 
         # Convert MongoDB cursor to a list of dictionaries
         leaderboard_list = []
@@ -435,6 +460,7 @@ def leaderboard_api():
         return jsonify(response_data)
     except Exception as e:
         return jsonify({"error": str(e)})
+    
   
 @app.route('/api/download', methods=['GET'])
 def download_api():
@@ -499,8 +525,24 @@ def get_benchmarks():
     except Exception as e:
         traceback.print_exc()
         return jsonify({"error": str(e)})
+    
+@app.route('/api/dataset', methods=['GET'])
+def get_datasets():
+    try:
+        # Fetch the benchmark data from your MongoDB collection
+        datasets = testcollection.distinct('benchmark')
 
+        return jsonify(datasets)
 
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": str(e)})
+
+@app.route('/api/languages', methods=['GET'])
+def get_languages():
+    languages = language_collection.distinct('value') 
+    return jsonify(languages)
+   
 @app.route('/api/myleaderboard', methods=['GET'])
 def myleaderboard_api():
     try:
@@ -514,14 +556,24 @@ def myleaderboard_api():
             # Get the selected campaign and tasktype from the query parameters
             selected_campaign = request.args.get('campaign')
             selected_tasktype = request.args.get('tasktype')
-            sort_param = request.args.get('sort', 'bleu')
+            selected_benchmark = request.args.get('benchmark')
+            selected_source_language = request.args.get('sourcelanguage')
+            selected_target_language = request.args.get('targetlanguage')
+
+            sort_param = request.args.get('sort', 'bleu')  # Default sorting parameter is 'bleu'
 
             # Define a filter based on the selected campaign, tasktype, and userId
-            filter = {"status": "published", "userId": user_id}
+            filter = {"$or": [{"status": "published"}, {"status": "rejected"}], "userId": user_id}
             if selected_campaign:
                 filter["campaignId"] = selected_campaign
             if selected_tasktype:
                 filter["tasktype"] = selected_tasktype
+            if selected_benchmark:
+                filter["benchmark"] = selected_benchmark
+            if selected_source_language:
+                filter["sourcelanguage"] = selected_source_language
+            if selected_target_language:
+                filter["targetlanguage"] = selected_target_language
 
             items = collection.find(filter).sort(sort_param, -1)
 
@@ -545,12 +597,11 @@ def myleaderboard_api():
 
     except Exception as e:
         return jsonify({"error": str(e)})
+
        
 @app.route('/api/submit', methods=['GET'])
 def submit_api():
     try:
-        # Clear all existing session data
-        session.clear()
 
         # Read the saved login response from the file
         with open('./login_response.json', 'r') as file:
@@ -597,7 +648,315 @@ def submit_api():
         return jsonify(response_data)
     except Exception as e:
         return jsonify({"error": str(e)})
-       
+    
+language_mapping = {
+    "English": "en",
+    "Gujarati": "gu",
+    "Hindi": "hi",
+    "Kannada": "kn",
+    "Kashmiri": "ks",
+    "Marathi": "mr",
+    "Odia": "or",
+    "Punjabi": "pa",
+    "Sindhi": "sd",
+    "Telugu": "te",
+    "Urdu": "ur"
+}
+
+@app.route('/translate', methods=['POST'])
+def translate():
+    try:
+        data = request.get_json()
+
+        slanguage = data.get('slanguage')
+        tlanguage = data.get('tlanguage')
+
+        source_language_code = language_mapping.get(slanguage)
+        target_language_code = language_mapping.get(tlanguage)
+
+        if not source_language_code or not target_language_code:
+            return jsonify({"error": "Invalid source or target language"}), 400
+
+        file_url = data.get('fileUrl')
+
+        output_file_path = "./translated_output.txt"
+        source_file_path = "./source.txt"
+
+        # Clear the contents of the files before appending new data
+        with open(output_file_path, "w", encoding="utf-8"):
+            pass
+        with open(source_file_path, "w", encoding="utf-8"):
+            pass
+
+        response = requests.get(file_url)
+
+        if response.status_code == 200:
+            file_content = response.text
+            translated_lines = []
+
+            for line in file_content.split('\n'):
+                stripped_line = line.strip()
+                if stripped_line:
+                    body = {
+                        "pipelineTasks": [
+                            {
+                                "taskType": "translation",
+                                "config": {
+                                    "language": {
+                                        "sourceLanguage": source_language_code,
+                                        "targetLanguage": target_language_code
+                                    },
+                                    "serviceId": "ai4bharat/indictrans-v2-all-gpu--t4"
+                                }
+                            }
+                        ],
+                        "inputData": {
+                            "input": [
+                                {
+                                    "source": stripped_line
+                                }
+                            ]
+                        }
+                    }
+
+                    url = "https://dhruva-api.bhashini.gov.in/services/inference/pipeline"
+
+                    # Include the necessary headers for authentication
+                    headers_translation_service = {
+                        "Content-Type": "application/json",
+                        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+                        "Authorization": "DveTyi8IJRxMNJdbUI0EhiE1X0yQYmoIiNLafiNLYbr4K0JCmDxFasFbOQQgkz7w",
+                        "userID": "77161d42ac744a418834a9cb977d8580",
+                        "ulcaApiKey": "25c42d1915-5e2f-4099-91fd-901ac068d511"
+                    }
+
+                    response_translation_service = requests.post(url, json=body, headers=headers_translation_service)
+
+                    if response_translation_service.status_code == 200:
+                        result = response_translation_service.json()
+                        translated_text = result['pipelineResponse'][0]['output'][0]['target']
+                        translated_lines.append(translated_text)
+                        save_original_to_file(stripped_line, source_file_path)
+                        save_to_file(translated_text, output_file_path)
+                    else:
+                        # Log the error details
+                        app.logger.error("Translation failed with status code %d. Response: %s", response_translation_service.status_code, response_translation_service.text)
+                        return jsonify({"error": f"Translation failed with status code: {response_translation_service.status_code}"}), 500
+
+            return jsonify({"success": True, "translations": translated_lines})
+    except Exception as e:
+        app.logger.exception("An error occurred during translation: %s", str(e))
+        return jsonify({"error": "Internal server error"}), 500
+
+
+def save_original_to_file(original_line, file_path):
+    with open(file_path, "a", encoding="utf-8") as source_file:
+        source_file.write(original_line + '\n')
+
+def save_to_file(line, file_path):
+    with open(file_path, "a", encoding="utf-8") as output_file:
+        output_file.write(line + '\n')
+
+@app.route('/googletranslate', methods=['POST'])
+def google_translate():
+    data = request.get_json()
+
+    slanguage = data.get('slanguage')
+    tlanguage = data.get('tlanguage')
+
+    source_language_code = language_mapping.get(slanguage)
+    target_language_code = language_mapping.get(tlanguage)
+
+    if not source_language_code or not target_language_code:
+        return jsonify({"error": "Invalid source or target language"}), 400
+    
+    input_filepath = os.path.join(os.path.dirname(__file__), "./translated_output.txt")
+    output_filepath = os.path.join(os.path.dirname(__file__), "./google_output.txt")
+
+    # Open the input file for reading
+    with open(input_filepath, 'r', encoding='utf-8') as input_file:
+        # Read the text from the input file
+        input_text = input_file.read()
+    
+    # Translate the text
+    translator = GoogleTranslator(source=source_language_code, target=target_language_code)
+    translated_text = translator.translate(input_text)
+
+    # Open the output file for writing (clearing its contents)
+    with open(output_filepath, 'w', encoding='utf-8') as output_file:
+        # Write the translated text to the output file
+        output_file.write(translated_text)
+
+    return jsonify({"success": True, "message": f"Translation saved to {output_filepath}"})
+
+language_mapping_api = {
+    "English": "eng",
+    "Gujarati": "guj",
+    "Hindi": "hin",
+    "Kannada": "kan",
+    "Kashmiri": "kas",
+    "Marathi": "mar",
+    "Punjabi": "pan",
+    "Sindhi": "snd",
+    "Telugu": "tel",
+    "Urdu": "urd",
+    "Odia": "ori"
+}
+
+headers = {
+    'Content-Type': 'application/json',
+}
+
+@app.route('/apitranslate', methods=['POST'])
+def apitranslate():
+    data = request.get_json()
+
+    slanguage = data.get('slanguage')
+    tlanguage = data.get('tlanguage')
+    apiurl = data.get('apiurl')
+
+    source_language_code = language_mapping_api.get(slanguage)
+    target_language_code = language_mapping_api.get(tlanguage)
+
+    url = apiurl
+
+    if not source_language_code or not target_language_code:
+        return jsonify({"error": "Invalid source or target language"}), 400
+
+    file_url = data.get('fileUrl')
+
+    output_file_path = "./translated_output.txt"
+    source_file_path = "./source.txt"
+
+    # Clear the contents of the files before appending new data
+    with open(output_file_path, "w", encoding="utf-8"):
+        pass
+    with open(source_file_path, "w", encoding="utf-8"):
+        pass
+
+    response = requests.get(file_url)
+
+    if response.status_code == 200:
+        file_content = response.text
+        translated_lines = []
+
+        for line in file_content.split('\n'):
+            stripped_line = line.strip()
+            if stripped_line:
+                data = {
+                    'text': stripped_line,
+                    'source_language': source_language_code,
+                    'target_language': target_language_code
+                }
+
+                try:
+                    # Disable SSL verification for simplicity (not recommended in a production environment)
+                    response = requests.post(url, headers=headers, json=data, verify=False)
+
+                    # Check if the request was successful (status code 200)
+                    if response.status_code == 200:
+                        result = json.loads(response.text)
+                        translated_text = result.get('data', '')
+                        translated_lines.append(translated_text)
+                        save_original_to_api_file(stripped_line, source_file_path)
+                        save_to_api_file(translated_text, output_file_path)
+                    else:
+                        return jsonify({"error": f'Translation failed with status code {response.status_code}'}), 500
+
+                except requests.RequestException as e:
+                    return jsonify({"error": f'Request error: {e}'}), 500
+
+        return jsonify({"success": True, "translations": translated_lines})
+
+    return jsonify({"error": f"Failed to fetch file with status code: {response.status_code}"}), 500
+
+
+def save_original_to_api_file(original_line, file_path):
+    with open(file_path, "a", encoding="utf-8") as source_file:
+        source_file.write(original_line + '\n')
+
+
+def save_to_api_file(line, file_path):
+    with open(file_path, "a", encoding="utf-8") as output_file:
+        output_file.write(line + '\n')
+
+headers = {
+    'Content-Type': 'application/json',
+}
+
+@app.route('/benchmarktranslate', methods=['POST'])
+def benchmarktranslate():
+    data = request.get_json()
+
+    slanguage = data.get('slanguage')
+    tlanguage = data.get('tlanguage')
+
+    source_language_code = language_mapping_api.get(slanguage)
+    target_language_code = language_mapping_api.get(tlanguage)
+
+    url = "https://ssmt.iiit.ac.in/onemt"
+
+    if not source_language_code or not target_language_code:
+        return jsonify({"error": "Invalid source or target language"}), 400
+
+    file_url = data.get('fileUrl')
+
+    output_file_path = "./translated_output.txt"
+    source_file_path = "./source.txt"
+
+    # Clear the contents of the files before appending new data
+    with open(output_file_path, "w", encoding="utf-8"):
+        pass
+    with open(source_file_path, "w", encoding="utf-8"):
+        pass
+
+    response = requests.get(file_url)
+
+    if response.status_code == 200:
+        file_content = response.text
+        translated_lines = []
+
+        for line in file_content.split('\n'):
+            stripped_line = line.strip()
+            if stripped_line:
+                data = {
+                    'text': stripped_line,
+                    'source_language': source_language_code,
+                    'target_language': target_language_code
+                }
+
+                try:
+                    # Disable SSL verification for simplicity (not recommended in a production environment)
+                    response = requests.post(url, headers=headers, json=data, verify=False)
+
+                    # Check if the request was successful (status code 200)
+                    if response.status_code == 200:
+                        result = json.loads(response.text)
+                        translated_text = result.get('data', '')
+                        translated_lines.append(translated_text)
+                        save_original_to_benchmark_file(stripped_line, source_file_path)
+                        save_to_benchmark_file(translated_text, output_file_path)
+                    else:
+                        return jsonify({"error": f'Translation failed with status code {response.status_code}'}), 500
+
+                except requests.RequestException as e:
+                    return jsonify({"error": f'Request error: {e}'}), 500
+
+        return jsonify({"success": True, "translations": translated_lines})
+
+    return jsonify({"error": f"Failed to fetch file with status code: {response.status_code}"}), 500
+
+
+def save_original_to_benchmark_file(original_line, file_path):
+    with open(file_path, "a", encoding="utf-8") as source_file:
+        source_file.write(original_line + '\n')
+
+
+def save_to_benchmark_file(line, file_path):
+    with open(file_path, "a", encoding="utf-8") as output_file:
+        output_file.write(line + '\n')
+
+
 @app.route('/api/register', methods=['GET'])
 def register_api():
     try:
@@ -732,8 +1091,6 @@ def send_email_notification(to_email, status):
 
     except Exception as e:
         print(f"Error sending email notification: {str(e)}")
-
-
 
             
 @app.route('/api/addtools', methods=['GET'])
@@ -995,31 +1352,6 @@ class SignInResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)})
 
-@app.route('/api/signout', methods=['GET'])
-def api_signout():
-    session.clear()
-    response = {'status': 'success', 'message': 'User signed out successfully'}
-
-    if 'logged_in' in session:
-        username = session.get('username')
-
-        if username:
-            # Check if the user is an admin by querying the database
-            admin = admincollection.find_one({"username": username})
-            if admin:
-                print("Admin:", username)
-                # Perform any additional admin-specific actions if needed
-            else:
-                print("Non-admin:", username)
-
-        # Clear session data
-        session.pop('logged_in', None)
-        session.pop('username', None)
-    else:
-        response['status'] = 'error'
-        response['message'] = 'User is not logged in'
-
-    return jsonify(response)
 
 class ProtectedResource(Resource):
     def get(self):
@@ -1160,7 +1492,7 @@ def process_checkboxes():
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
-s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_ACCESS_KEY_SECRET, region_name=AWS_S3_REGION)
+s3 = boto3.client('s3', aws_access_key_id=Config.AWS_ACCESS_KEY_ID, aws_secret_access_key=Config.AWS_ACCESS_KEY_SECRET, region_name=Config.AWS_S3_REGION)
 
 @app.route('/api/download/<filename>', methods=['GET'])
 def download_file(filename):
@@ -1311,7 +1643,7 @@ def langform():
 
     return f_names
   
-s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_ACCESS_KEY_SECRET, region_name=AWS_S3_REGION)
+s3 = boto3.client('s3', aws_access_key_id=Config.AWS_ACCESS_KEY_ID, aws_secret_access_key=Config.AWS_ACCESS_KEY_SECRET, region_name=Config.AWS_S3_REGION)
 
 count = 0
 
@@ -1432,12 +1764,12 @@ def newform_api():
             organisation = request.form["organisation"]
             campaign_id = request.form["campaign"]
             tasktype = request.form["tasktype"]
+            benchmark = request.form["benchmark"]
             slanguage = request.form["slanguage"]
             tlanguage = request.form["tlanguage"] 
             testsetname = request.form["testsetname"]
             module = request.form["module"]
             version = request.form["version"]
-            file = request.files["file"]
             with open('./login_response.json','r') as file:
                 login_response = json.load(file)
                 userId = login_response["user_id"]
@@ -1448,25 +1780,29 @@ def newform_api():
                 campaign = login_response["campaign"]
                 userId = login_response["user_id"]
             tasktype = request.form["tasktype"]
+            benchmark = request.form["benchmark"]
             slanguage = request.form["slanguage"]
             tlanguage = request.form["tlanguage"]
             testsetname = request.form["testsetname"]
             module = request.form["module"]
             version = request.form["version"]
-            file = request.files["file"]
 
         print(f"Organisation: {organisation}")
 
-        file_data = file.read()
+        #file_data = file.read()
+
+        with open('./translated_output.txt', 'rb') as translated_output_file:
+            file_data = translated_output_file.read()
+
         file_size = len(file_data)
         print(f"The size of the file is: {file_size} bytes")
 
         # Upload file to AWS S3
-        s3.upload_fileobj(io.BytesIO(file_data), AWS_S3_BUCKET, f"SubmitFiles/{tlanguage}_usr.txt")
+        s3.upload_fileobj(io.BytesIO(file_data), Config.AWS_S3_BUCKET, f"SubmitFiles/{tlanguage}_usr.txt")
         print("File UPLOADED to S3")
 
         # Get public URL for the uploaded file
-        file_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/SubmitFiles/{tlanguage}_usr.txt"
+        file_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/SubmitFiles/{tlanguage}_usr.txt"
         print(f"File URL: {file_url}")
 
         # Download the submitted file and save it to the local desktop
@@ -1480,6 +1816,7 @@ def newform_api():
             "sourcelanguage": slanguage,
             "targetlanguage": tlanguage,
             "tasktype": tasktype,
+            "benchmark": benchmark,
             "filename": testsetname
         })
 
@@ -1593,6 +1930,7 @@ def newform_api():
                     "rowno": str(count),
                     "organisation": organisation,
                     "tasktype": tasktype,
+                    "benchmark": benchmark,
                     "language": slanguage + '-' + tlanguage,
                     "sourcelanguage": slanguage,
                     "targetlanguage": tlanguage,
@@ -1600,6 +1938,8 @@ def newform_api():
                     "module": module,
                     "version": version,
                     "fileurl": file_url,
+                    "sourcefileurl": sor_url, 
+                    "targetfileurl": ref_url, 
                     "bleu": str(data),
                     "chrf": str(data1),
                     "ter": str(data2),
@@ -1611,7 +1951,8 @@ def newform_api():
                     "comet": str(data8),
                     "status": "in review",
                     "campaignId": campaign_id,  # Add campaignId to the document
-                    "userId":user_id
+                    "userId":user_id,
+                    "date":datetime.datetime.now(datetime.timezone.utc).strftime(f"%b-%d-%Y, %I:%M %p"),
                 }
 
                 # Your existing MongoDB insertion code...
@@ -1627,6 +1968,456 @@ def newform_api():
             # No reference file found, return an error message
             error_message = "No Reference File found. Please re-check the required fields along with the Tasktypes."
             return jsonify({"error": error_message}), 400  # Use a 400 status code for client-side errors
+    except ValueError as ve:
+    # Handle specific error: Mismatch in the number of predictions and references
+        error_message = str(ve)
+        return jsonify({"error": error_message, "type": "ValueError"}), 400
+
+    except NoCredentialsError:
+        return jsonify({"error": "AWS credentials not available", "type": "AWSCredentialsError"}), 400
+
+    except Exception as e:
+        print(f"Unexpected Error: {e}")
+        traceback.print_exc()
+        return jsonify({"error": f"Unexpected Error: {e}", "type": "UnexpectedError"}), 500
+
+@app.route('/api/manualnewform', methods=['POST', 'GET'])
+def manualnewform_api():
+    count = collection.count_documents({})
+
+    # Increment count to get the next rowno
+    count += 1
+
+    # Read the saved login response from the file
+    with open('./login_response.json', 'r') as file:
+        login_response = json.load(file)
+        role = login_response.get('role', '')
+        user_id = login_response.get('user_id', 'Unknown')
+        username = login_response.get('username', '')
+        organisation = login_response.get('organisation', '')
+        campaign_id = login_response.get('campaignId', '')  # Extract campaignId
+        campaign = login_response.get('campaign', '')
+
+        # Set the session data
+        session['role'] = role
+        session['user_id'] = user_id
+        session['username'] = username
+        session['organisation'] = organisation
+        session['campaignId'] = campaign_id
+        session['campaign'] = campaign
+
+    try:
+        # Extract data based on user role
+        if role == "admin":
+            organisation = request.form["organisation"]
+            campaign_id = request.form["campaign"]
+            tasktype = request.form["tasktype"]
+            benchmark = request.form["benchmark"]
+            slanguage = request.form["slanguage"]
+            tlanguage = request.form["tlanguage"] 
+            testsetname = request.form["testsetname"]
+            module = request.form["module"]
+            version = request.form["version"]
+            file = request.files["file"]
+            with open('./login_response.json','r') as file:
+                login_response = json.load(file)
+                userId = login_response["user_id"]
+        else:
+            with open('./login_response.json', 'r') as file:
+                login_response = json.load(file)
+                organisation = login_response["organisation"]
+                campaign = login_response["campaign"]
+                userId = login_response["user_id"]
+            tasktype = request.form["tasktype"]
+            benchmark = request.form["benchmark"]
+            slanguage = request.form["slanguage"]
+            tlanguage = request.form["tlanguage"]
+            testsetname = request.form["testsetname"]
+            module = request.form["module"]
+            version = request.form["version"]
+            file = request.files["file"]
+
+        print(f"Organisation: {organisation}")
+
+        file_data = file.read()
+
+        file_size = len(file_data)
+        print(f"The size of the file is: {file_size} bytes")
+
+        # Upload file to AWS S3
+        s3.upload_fileobj(io.BytesIO(file_data), Config.AWS_S3_BUCKET, f"SubmitFiles/{tlanguage}_usr.txt")
+        print("File UPLOADED to S3")
+
+        # Get public URL for the uploaded file
+        file_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/SubmitFiles/{tlanguage}_usr.txt"
+        print(f"File URL: {file_url}")
+
+        # Download the submitted file and save it to the local desktop
+        local_hypothesis_path = './hypothesis.txt'  # Specify the path where you want to save the hypothesis file locally
+        with open(local_hypothesis_path, 'wb') as local_hypothesis_file:
+            local_hypothesis_file.write(file_data.strip())
+
+        print("Hypothesis file saved to local desktop:", local_hypothesis_path)
+
+        ref_cursor = testcollection.find({
+            "sourcelanguage": slanguage,
+            "targetlanguage": tlanguage,
+            "tasktype": tasktype,
+            "benchmark": benchmark,
+            "filename": testsetname
+        })
+
+        # Convert the cursor to a list
+        ref = list(ref_cursor)
+
+        print("Query criteria:")
+        print(f"sourcelanguage: {slanguage}, targetlanguage: {tlanguage}, tasktype: {tasktype}, filename: {testsetname}")
+
+        ref_count = len(ref)
+        print(f"Number of matching documents: {ref_count}")
+
+        if ref_count > 0:
+            print("Reference file found.")
+            matching_document = ref[0]
+            sor_url = matching_document.get('fileurl')
+            ref_url = matching_document.get('targetfileurl')
+            print("Reference URL:", ref_url)
+            print("Source URL:", sor_url)
+
+            if ref_url:
+                response1 = requests.get(ref_url)
+                response2 = requests.get(sor_url)
+
+                # Save the reference file to the desired location on the local server
+                with open('./rf.txt', 'w', encoding='utf-8') as f:
+                    f.write(response1.text.strip())
+
+                print("Reference file saved to local directory")
+
+                with open('./sf.txt', 'w', encoding='utf-8') as f:
+                    f.write(response2.text.strip())
+
+                print("Source file saved to local directory")
+
+                # Get the contents of the hypothesis file
+                with open(local_hypothesis_path, 'r', encoding='utf-8') as f:
+                    hypothesis_text = f.read()
+
+                # Reference file is already saved to ./rf.txt, so read from this file
+                with open('./rf.txt', 'r', encoding='utf-8') as f:
+                    reference_text = f.read()
+
+                # Reference file is already saved to ./rf.txt, so read from this file
+                with open('./sf.txt', 'r', encoding='utf-8') as f:
+                    source_text = f.read()
+
+                hypothesis_text_list = hypothesis_text.split("\n")
+                reference_text_list = reference_text.split("\n")
+                source_text_list = source_text.split("\n")
+
+                print(len(hypothesis_text_list), len(reference_text_list), len(source_text_list))
+
+
+                bleu = BLEU()
+                r = bleu.corpus_score(hypothesis_text_list, [reference_text_list])
+                print(r)
+                text = str(r)
+                parts = text.split()
+                bleuscore = parts[2]
+                print(bleuscore)
+                """ s = bleu.get_signature()
+                print(s) """
+
+                hypothesis_text = "\n".join(hypothesis_text_list)
+                reference_text = "\n".join(reference_text_list)
+                source_text = "\n".join(source_text_list)
+
+                # Call evaluate_metrics function to get scores
+                cer_score, wer_score, chrf_score, ter_score, bert_score, precision, recall, f1, comet_score = evaluate_metrics(hypothesis_text_list, reference_text_list, source_text_list)
+
+                print(f"CER Score: {cer_score}")
+                print(f"WER Score: {wer_score}")
+                print(f"TER Score: {ter_score}")
+                print(f"CHRF Score: {chrf_score}")
+                print(f"BLEU Score: {bleuscore}")
+                print(f"BERT Score: {bert_score}")
+                print(f"PRECISION: {precision}")
+                print(f"RECALL: {recall}")
+                print(f"F1: {f1}")
+                print(f"COMET Score: {comet_score}")
+
+                # Save scores to a file
+                scores_file_path = './scores.txt'
+                with open(scores_file_path, 'w') as scores_file:
+                    scores_file.write(f"CER Score: {cer_score}\n")
+                    scores_file.write(f"WER Score: {wer_score}\n")
+                    scores_file.write(f"TER Score: {ter_score}\n")
+                    scores_file.write(f"CHRF Score: {chrf_score}\n")
+                    scores_file.write(f"BLEU Score: {bleuscore}\n")
+                    scores_file.write(f"PRECISION: {precision}\n")
+                    scores_file.write(f"RECALL: {recall}\n")
+                    scores_file.write(f"F1: {f1}\n")    
+                    scores_file.write(f"COMET Score: {comet_score}\n")
+
+
+                print("Complete")
+
+                data1 = chrf_score
+                data = bleuscore
+                data2 = ter_score
+                data3 = cer_score
+                data4 = wer_score
+                data5 = precision
+                data6 = recall
+                data7 = f1
+                data8 = comet_score
+
+                # Update the document with campaignId
+                document = {
+                    "rowno": str(count),
+                    "organisation": organisation,
+                    "tasktype": tasktype,
+                    "benchmark": benchmark,
+                    "language": slanguage + '-' + tlanguage,
+                    "sourcelanguage": slanguage,
+                    "targetlanguage": tlanguage,
+                    "testsetname": testsetname,
+                    "module": module,
+                    "version": version,
+                    "fileurl": file_url,
+                    "sourcefileurl": sor_url, 
+                    "targetfileurl": ref_url, 
+                    "bleu": str(data),
+                    "chrf": str(data1),
+                    "ter": str(data2),
+                    "cer": str(data3),
+                    "wer": str(data4),
+                    "precision" : str(data5),
+                    "recall": str(data6),
+                    "f1": str(data7),
+                    "comet": str(data8),
+                    "status": "in review",
+                    "campaignId": campaign_id,  # Add campaignId to the document
+                    "userId":user_id,
+                    "date":datetime.datetime.now(datetime.timezone.utc).strftime(f"%b-%d-%Y, %I:%M %p"),
+                }
+
+                # Your existing MongoDB insertion code...
+                collection.insert_one(document)
+                count = count + 1
+                print(f"Stored document with count: {count}")
+
+                scores_response = {"data": [data, data1, data2, data3, data4, data5, data6, data7, data8], "message": "Scores calculated and stored successfully"}
+                scores_response["scores_file_path"] = scores_file_path
+                return jsonify(scores_response)
+
+        else:
+            # No reference file found, return an error message
+            error_message = "No Reference File found. Please re-check the required fields along with the Tasktypes."
+            return jsonify({"error": error_message}), 400  # Use a 400 status code for client-side errors
+    except ValueError as ve:
+    # Handle specific error: Mismatch in the number of predictions and references
+        error_message = str(ve)
+        return jsonify({"error": error_message, "type": "ValueError"}), 400
+
+    except NoCredentialsError:
+        return jsonify({"error": "AWS credentials not available", "type": "AWSCredentialsError"}), 400
+
+    except Exception as e:
+        print(f"Unexpected Error: {e}")
+        traceback.print_exc()
+        return jsonify({"error": f"Unexpected Error: {e}", "type": "UnexpectedError"}), 500
+
+@app.route('/api/benchmarknewform', methods=['POST', 'GET'])
+def benchmarknewform_api():
+    count = collection.count_documents({})
+
+    # Increment count to get the next rowno
+    count += 1
+
+    # Read the saved login response from the file
+    with open('./login_response.json', 'r') as file:
+        login_response = json.load(file)
+        role = login_response.get('role', '')
+        user_id = login_response.get('user_id', 'Unknown')
+        username = login_response.get('username', '')
+        campaign = login_response.get('campaign', '')
+
+        # Set the session data
+        session['role'] = role
+        session['user_id'] = user_id
+        session['username'] = username
+        session['campaign'] = campaign
+    try:
+        data = request.get_json()
+
+        # Extract necessary details from the data
+        slanguage = data.get('sourcelanguage')
+        tlanguage = data.get('targetlanguage')
+        sourcefileurl = data.get('sourcefileurl')
+        targetfileurl = data.get('targetfileurl')
+        tasktype = data.get('tasktype')
+        testsetname = data.get('filename')
+        benchmark = data.get('benchmark')
+        campaign_id = data.get('campaign')
+
+        # Extract the new key 'organisation' from the data
+        organisation = data.get('organisation', '')
+
+        with open('./login_response.json','r') as file:
+                login_response = json.load(file)
+                userId = login_response["user_id"]
+
+        with open('./translated_output.txt', 'rb') as translated_output_file:
+            file_data = translated_output_file.read()
+
+        file_size = len(file_data)
+        print(f"The size of the file is: {file_size} bytes")
+
+
+        # Upload file to AWS S3
+        s3.upload_fileobj(io.BytesIO(file_data), Config.AWS_S3_BUCKET, f"SubmitFiles/{tlanguage}_usr.txt")
+        print("File UPLOADED to S3")
+
+        # Get public URL for the uploaded file
+        file_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/SubmitFiles/{tlanguage}_usr.txt"
+        print(f"File URL: {file_url}")
+
+
+        # Download the submitted file and save it to the local desktop
+        local_hypothesis_path = './hypothesis.txt'  # Specify the path where you want to save the hypothesis file locally
+        with open(local_hypothesis_path, 'wb') as local_hypothesis_file:
+            local_hypothesis_file.write(file_data.strip())
+
+        print("Hypothesis file saved to local desktop:", local_hypothesis_path)
+
+        if targetfileurl:
+                response1 = requests.get(targetfileurl)
+                response2 = requests.get(sourcefileurl)
+
+                # Save the reference file to the desired location on the local server
+                with open('./rf.txt', 'w', encoding='utf-8') as f:
+                    f.write(response1.text.strip())
+
+                print("Reference file saved to local directory")
+
+                with open('./sf.txt', 'w', encoding='utf-8') as f:
+                    f.write(response2.text.strip())
+
+                print("Source file saved to local directory")
+
+                # Get the contents of the hypothesis file
+                with open(local_hypothesis_path, 'r', encoding='utf-8') as f:
+                    hypothesis_text = f.read()
+
+                # Reference file is already saved to ./rf.txt, so read from this file
+                with open('./rf.txt', 'r', encoding='utf-8') as f:
+                    reference_text = f.read()
+
+                # Reference file is already saved to ./rf.txt, so read from this file
+                with open('./sf.txt', 'r', encoding='utf-8') as f:
+                    source_text = f.read()
+
+                hypothesis_text_list = hypothesis_text.split("\n")
+                reference_text_list = reference_text.split("\n")
+                source_text_list = source_text.split("\n")
+
+                print(len(hypothesis_text_list), len(reference_text_list), len(source_text_list))
+
+
+                bleu = BLEU()
+                r = bleu.corpus_score(hypothesis_text_list, [reference_text_list])
+                print(r)
+                text = str(r)
+                parts = text.split()
+                bleuscore = parts[2]
+                print(bleuscore)
+                """ s = bleu.get_signature()
+                print(s) """
+
+                hypothesis_text = "\n".join(hypothesis_text_list)
+                reference_text = "\n".join(reference_text_list)
+                source_text = "\n".join(source_text_list)
+
+                # Call evaluate_metrics function to get scores
+                cer_score, wer_score, chrf_score, ter_score, bert_score, precision, recall, f1, comet_score = evaluate_metrics(hypothesis_text_list, reference_text_list, source_text_list)
+
+                print(f"CER Score: {cer_score}")
+                print(f"WER Score: {wer_score}")
+                print(f"TER Score: {ter_score}")
+                print(f"CHRF Score: {chrf_score}")
+                print(f"BLEU Score: {bleuscore}")
+                print(f"BERT Score: {bert_score}")
+                print(f"PRECISION: {precision}")
+                print(f"RECALL: {recall}")
+                print(f"F1: {f1}")
+                print(f"COMET Score: {comet_score}")
+
+                # Save scores to a file
+                scores_file_path = './benchmark_scores.txt'
+                with open(scores_file_path, 'w') as scores_file:
+                    scores_file.write(f"CER Score: {cer_score}\n")
+                    scores_file.write(f"WER Score: {wer_score}\n")
+                    scores_file.write(f"TER Score: {ter_score}\n")
+                    scores_file.write(f"CHRF Score: {chrf_score}\n")
+                    scores_file.write(f"BLEU Score: {bleuscore}\n")
+                    scores_file.write(f"PRECISION: {precision}\n")
+                    scores_file.write(f"RECALL: {recall}\n")
+                    scores_file.write(f"F1: {f1}\n")    
+                    scores_file.write(f"COMET Score: {comet_score}\n")
+
+
+                print("Complete")
+
+                data1 = chrf_score
+                data = bleuscore
+                data2 = ter_score
+                data3 = cer_score
+                data4 = wer_score
+                data5 = precision
+                data6 = recall
+                data7 = f1
+                data8 = comet_score
+
+                document = {
+                    "rowno": str(count),
+                    "organisation": organisation, 
+                    "tasktype": tasktype,
+                    "benchmark": benchmark,
+                    "language": slanguage + '-' + tlanguage,
+                    "sourcelanguage": slanguage,
+                    "targetlanguage": tlanguage,
+                    "testsetname": testsetname,
+                    "module": organisation,
+                    "version": "MT",
+                    "fileurl": file_url,
+                    "sourcefileurl": sourcefileurl, 
+                    "targetfileurl": targetfileurl, 
+                    "bleu": str(data),
+                    "chrf": str(data1),
+                    "ter": str(data2),
+                    "cer": str(data3),
+                    "wer": str(data4),
+                    "precision" : str(data5),
+                    "recall": str(data6),
+                    "f1": str(data7),
+                    "comet": str(data8),
+                    "status": "published",
+                    "campaignId": campaign_id,  # Add campaignId to the document
+                    "userId":user_id,
+                    "date":datetime.datetime.now(datetime.timezone.utc).strftime(f"%b-%d-%Y, %I:%M %p"),
+                }
+
+                # Your existing MongoDB insertion code...
+                collection.insert_one(document)
+                count = count + 1
+                print(f"Stored document with count: {count}")
+
+                scores_response = {"data": [data, data1, data2, data3, data4, data5, data6, data7, data8], "message": "Scores calculated and stored successfully"}
+                scores_response["scores_file_path"] = scores_file_path
+                return jsonify(scores_response)
+
+
     except ValueError as ve:
     # Handle specific error: Mismatch in the number of predictions and references
         error_message = str(ve)
@@ -1688,6 +2479,7 @@ def api_publish():
             })
 
             # Update the status to "published" for the selected items
+            # Update the status to "published" for the selected items
             for item in items_to_publish:
                 collection.update_one(
                     {"_id": item["_id"]},
@@ -1707,6 +2499,10 @@ def api_publish():
 
             # Convert MongoDB cursor to a list of dictionaries
             items_list = list(items1)
+
+            # Convert ObjectId to string in each dictionary
+            for item in items_list:
+                item["_id"] = str(item["_id"])
 
             return jsonify({"status": "success", "items": items_list})
 
@@ -1749,13 +2545,14 @@ def api_reject():
             })
 
             # Update the status to "published" for the selected items
+            # Update the status to "published" for the selected items
             for item in items_to_publish:
                 collection.update_one(
                     {"_id": item["_id"]},
                     {"$set": {"status": "rejected"}}
                 )
 
-            return jsonify({"status": "success", "message": "Item not published"})
+            return jsonify({"status": "success", "message": "Item(s) published successfully"})
 
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
@@ -1769,11 +2566,179 @@ def api_reject():
             # Convert MongoDB cursor to a list of dictionaries
             items_list = list(items1)
 
+            # Convert ObjectId to string in each dictionary
+            for item in items_list:
+                item["_id"] = str(item["_id"])
+
             return jsonify({"status": "success", "items": items_list})
 
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
-        
+
+@app.route('/api/details', methods=['GET'])
+def fetch_details_api():
+    try:
+        # Extract parameters from the request URL
+        organization = request.args.get('organization')
+        source_language = request.args.get('sourcelanguage')
+        target_language = request.args.get('targetlanguage')
+        model_name = request.args.get('modelname')
+        version = request.args.get('version')
+        date = request.args.get('date')
+
+        # Construct the query based on the provided parameters
+        query = {
+            "organisation": organization,
+            "sourcelanguage": source_language,
+            "targetlanguage": target_language,
+            "module": model_name,
+            "version": version,
+            "date": date
+        }
+
+        # Fetch details from the MongoDB collection
+        details_data_cursor = collection.find(query)
+        details_data_list = list(details_data_cursor)
+
+        # Check if any details were found
+        if details_data_list:
+            details_data = details_data_list[0]  # Assuming only one document is expected
+
+            # Convert ObjectId to string for serialization
+            details_data['_id'] = str(details_data['_id'])
+
+            return jsonify({"data": details_data})
+        else:
+            return jsonify({"error": "Details not found"}), 404  # Use a 404 status code for not found
+
+    except Exception as e:
+        print(f"Error fetching details: {e}")
+        return jsonify({"error": f"Error fetching details: {e}"}), 500
+
+@app.route('/api/autopublish', methods=['POST', 'GET'])
+def auto_publish():
+    global count
+
+    if request.method == 'POST':
+        try:
+            with open('./login_response.json', 'r') as file:
+                login_response = json.load(file)
+                organisation = login_response["organisation"]
+            tasktype = request.form["tasktype"]
+            slanguage = request.form["slanguage"]
+            tlanguage = request.form["tlanguage"]
+            testsetname = request.form["testsetname"]
+            module = request.form["module"]
+            version = request.form["version"]
+            api = request.form["apiurl"]
+
+
+             # Query the MongoDB collection for the updated items with status "in review"
+            items_to_publish = collection.find({
+                "status": "in review",
+                "organisation": organisation,  # Adjust this based on your data model
+                "tasktype": tasktype,  # Adjust this based on your data model
+                "sourcelanguage": slanguage,
+                "targetlanguage": tlanguage,
+                "testsetname": testsetname,
+                "module": module,
+                "version": version,
+                # Add more criteria if needed to uniquely identify the items to publish
+            })
+
+            # Update the status to "published" for the selected items
+            # Update the status to "published" for the selected items
+            for item in items_to_publish:
+                collection.update_one(
+                    {"_id": item["_id"]},
+                    {"$set": {"status": "published"}}
+                )
+
+            return jsonify({"status": "success", "message": "Item(s) published successfully"})
+
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
+
+    elif request.method == 'GET':
+        try:
+            # Query the MongoDB collection for the items with status "in review"
+            items = collection.find({"status": "in review"})
+            items1 = items.sort("version", -1)
+
+            # Convert MongoDB cursor to a list of dictionaries
+            items_list = list(items1)
+
+            # Convert ObjectId to string in each dictionary
+            for item in items_list:
+                item["_id"] = str(item["_id"])
+
+            return jsonify({"status": "success", "items": items_list})
+
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
+
+@app.route('/api/autoreject', methods=['POST', 'GET'])
+def auto_reject():
+    global count
+
+    if request.method == 'POST':
+        try:
+            with open('./login_response.json', 'r') as file:
+                login_response = json.load(file)
+                organisation = login_response["organisation"]
+            tasktype = request.form["tasktype"]
+            slanguage = request.form["slanguage"]
+            tlanguage = request.form["tlanguage"]
+            testsetname = request.form["testsetname"]
+            module = request.form["module"]
+            version = request.form["version"]
+            api = request.form["apiurl"]
+
+
+             # Query the MongoDB collection for the updated items with status "in review"
+            items_to_publish = collection.find({
+                "status": "in review",
+                "organisation": organisation,  # Adjust this based on your data model
+                "tasktype": tasktype,  # Adjust this based on your data model
+                "sourcelanguage": slanguage,
+                "targetlanguage": tlanguage,
+                "testsetname": testsetname,
+                "module": module,
+                "version": version,
+                # Add more criteria if needed to uniquely identify the items to publish
+            })
+
+            # Update the status to "published" for the selected items
+            # Update the status to "published" for the selected items
+            for item in items_to_publish:
+                collection.update_one(
+                    {"_id": item["_id"]},
+                    {"$set": {"status": "rejected"}}
+                )
+
+            return jsonify({"status": "success", "message": "Item(s) published successfully"})
+
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
+
+    elif request.method == 'GET':
+        try:
+            # Query the MongoDB collection for the items with status "in review"
+            items = collection.find({"status": "in review"})
+            items1 = items.sort("version", -1)
+
+            # Convert MongoDB cursor to a list of dictionaries
+            items_list = list(items1)
+
+            # Convert ObjectId to string in each dictionary
+            for item in items_list:
+                item["_id"] = str(item["_id"])
+
+            return jsonify({"status": "success", "items": items_list})
+
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)})
+
 @app.route('/create', methods=['POST','GET'])# user registeration data storing
 def create():
     global counter
@@ -1932,10 +2897,10 @@ def create_campaign():
         tfile_data = thumbnail_file.read()
 
         # Upload the image to an AWS S3 bucket
-        s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_ACCESS_KEY_SECRET)
+        s3 = boto3.client('s3', aws_access_key_id=Config.AWS_ACCESS_KEY_ID, aws_secret_access_key=Config.AWS_ACCESS_KEY_SECRET)
         object_name = tname
-        s3.upload_fileobj(io.BytesIO(tfile_data), AWS_S3_BUCKET, object_name)
-        s3_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{object_name}"
+        s3.upload_fileobj(io.BytesIO(tfile_data), Config.AWS_S3_BUCKET, object_name)
+        s3_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/{object_name}"
 
         # Updating the tasktypes structure
         tasktypes = [{"name": task["name"], "metrics": task["metrics"]} for task in task_types]
@@ -2023,29 +2988,32 @@ def api_form2():
         filename = request.form["filename"]
         file = request.files["sourceFile"]
         tfile = request.files["targetFile"]
+        benchmark = request.form["benchmark"]
 
-        # Generate unique file names for source and target files
-        file_name = f"TestSetFiles/{file.filename}"
-        target_file_name = f"TargetFiles/{tfile.filename}"
+        # Generate unique file names with timestamps for source and target files
+        timestamp = datetime.datetime.now().strftime(f"%Y%m%d%H%M%S")
+
+        file_name = f"TestSetFiles/{timestamp}_{file.filename}"
+        target_file_name = f"TargetFiles/{timestamp}_{tfile.filename}"
 
         # Read file data
         file_data = file.read()
         tfile_data = tfile.read()
 
         # Create an S3 client
-        s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_ACCESS_KEY_SECRET, region_name=AWS_S3_REGION)
+        s3 = boto3.client('s3', aws_access_key_id=Config.AWS_ACCESS_KEY_ID, aws_secret_access_key=Config.AWS_ACCESS_KEY_SECRET, region_name=Config.AWS_S3_REGION)
 
         # Upload the source file to AWS S3
-        s3.upload_fileobj(io.BytesIO(file_data), AWS_S3_BUCKET, file_name)
+        s3.upload_fileobj(io.BytesIO(file_data), Config.AWS_S3_BUCKET, file_name)
 
         # Get the public URL for the source file
-        image_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{file_name}"
+        image_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/{file_name}"
 
         # Upload the target file to AWS S3
-        s3.upload_fileobj(io.BytesIO(tfile_data), AWS_S3_BUCKET, target_file_name)
+        s3.upload_fileobj(io.BytesIO(tfile_data), Config.AWS_S3_BUCKET, target_file_name)
 
         # Get the public URL for the target file
-        target_image_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{target_file_name}"
+        target_image_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/{target_file_name}"
 
         # Create a document for MongoDB
         document = {
@@ -2058,6 +3026,7 @@ def api_form2():
             "filename": filename,
             "fileurl": image_url,
             "targetfileurl": target_image_url,
+            "benchmark": benchmark,
             "status": "In review",
             "campaign": campaign,  # Add this line to store the selected campaign
         }
@@ -2115,10 +3084,10 @@ def api_toolsform():
         tfile_data = tfile.read()
 
         # Upload the image to an AWS S3 bucket
-        s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_ACCESS_KEY_SECRET)
+        s3 = boto3.client('s3', aws_access_key_id=Config.AWS_ACCESS_KEY_ID, aws_secret_access_key=Config.AWS_ACCESS_KEY_SECRET)
         object_name = tname
-        s3.upload_fileobj(io.BytesIO(tfile_data), AWS_S3_BUCKET, object_name)
-        s3_url = f"https://{AWS_S3_BUCKET}.s3.amazonaws.com/{object_name}"
+        s3.upload_fileobj(io.BytesIO(tfile_data), Config.AWS_S3_BUCKET, object_name)
+        s3_url = f"https://{Config.AWS_S3_BUCKET}.s3.amazonaws.com/{object_name}"
 
         # Store the data in your database or collection
         document = {
@@ -2160,21 +3129,26 @@ def update():
     for row in all_rows_data:
         rowno = row["rowno"]
         organisation = row["organisation"]
-        language = row["language"]
+        sourcelanguage = row["sourcelanguage"]
+        targetlanguage = row['targetlanguage']
         module = row["module"]
         version = row["version"]
+        date = row["date"]
         bleu = row["bleu"]
         chrf = row["chrf"]
         ter = row["ter"]
+        comet = row['comet']
         score = row["score"]
 
         # Update the data in the collection based on the "rowno" field
-        collection.update_one({"rowno": rowno,"organisation": organisation,"language": language}, {"$set": {            
+        collection.update_one({"rowno": rowno,"organisation": organisation,"sourcelanguage": sourcelanguage, "targetlanguage":targetlanguage}, {"$set": {            
             "module": module,
             "version": version,
+            "date": date,
             "bleu":bleu,
             "chrf":chrf,
             "ter":ter,
+            "comet":comet,
             "score":score
         }})
         print("updated")
@@ -2202,14 +3176,5 @@ def update_campaign():
 
     return jsonify({"message": "Data updated successfully"})
 
-if __name__ == "__main__":
+if __name__=='__main__':
     app.run(host='ec2-13-233-215-141.ap-south-1.compute.amazonaws.com', port=5000)
-
-
-
-
-
-
-
-
-
